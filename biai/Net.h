@@ -17,5 +17,8 @@ public:
 	void getResults(vector<double> resultValues) const; 
 private:
 	vector<Layer> prv_layers;
+	double prv_error;
+	double prv_recentAverageError;
+	double prv_recentAverageSmoothingFactor;
 };
 
