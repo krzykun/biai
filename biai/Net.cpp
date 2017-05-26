@@ -16,6 +16,7 @@ Net::Net(const vector<unsigned> &topology)
 			else
 				cout << "I'm not creating useless neurons.\n";
 		}
+		prv_layers.back().back().setOutputValue(1.0);
 	}
 }
 
@@ -45,10 +46,63 @@ void Net::feedForward(const vector<double> &inputValues)
 
 void Net::backProp(const vector<double> &targetValues)
 {
+	//TODO try different backProp schemas
+	Layer &outputLayer = prv_layers.back();
+	prv_error = 0.0;
 
+	for (unsigned whichNeuron = 0; whichNeuron < outputLayer.size() - 1; ++whichNeuron)
+	{
+		double delta = targetValues[whichNeuron] - outputLayer[whichNeuron].getOutputValue();
+		prv_error += delta*delta;
+	}
+	prv_error /= outputLayer.size() - 1; //average error squared
+	prv_error = sqrt(prv_error);
+
+	// Implement a recent average measurement
+
+	prv_recentAverageError = (prv_recentAverageError * prv_recentAverageSmoothingFactor + prv_error) / (prv_recentAverageSmoothingFactor + 1.0);
+
+	//calculate output layer gradients
+
+	for (unsigned whichNeuron = 0; whichNeuron < outputLayer.size() - 1; ++whichNeuron)
+	{
+		outputLayer[whichNeuron].calcOutputGradients(targetValues[whichNeuron]);
+	}
+	
+	//Calculate gradients on hidden layers
+
+	for (unsigned whichLayer = prv_layers.size() - 2; whichLayer > 0; --whichLayer)
+	{
+		Layer &hiddenLayer = prv_layers[whichLayer];
+		Layer &nextLayer = prv_layers[whichLayer + 1];	//convenience vars for debug later
+
+		for (unsigned whichNeuron = 0; whichNeuron < hiddenLayer.size(); ++whichNeuron)
+		{
+			hiddenLayer[whichNeuron].calcHiddenGradients(nextLayer);
+		}
+	}
+
+	//For all layers from outputs to first hidden layer
+	// update connection weights
+
+	for (unsigned whichLayer = prv_layers.size() - 1; whichLayer > 0; --whichLayer)
+	{
+		Layer &layer = prv_layers[whichLayer];
+		Layer &prevLayer = prv_layers[whichLayer - 1];
+
+		for (unsigned whichNeuron = 0; whichNeuron < layer.size() - 1; ++whichNeuron)
+		{
+			layer[whichNeuron].updateInputWeights(prevLayer);
+		}
+	}
 }
 
 void Net::getResults(vector<double> resultValues) const
 {
+	resultValues.clear();
 
+	for (unsigned whichNeuron = 0; whichNeuron < prv_layers.back().size() - 1; ++whichNeuron)
+	{
+		resultValues.push_back(prv_layers.back()[whichNeuron].getOutputValue());
+	}
 }
