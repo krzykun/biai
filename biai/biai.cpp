@@ -26,6 +26,7 @@ int main()
 	topology.push_back(1);
 
 	Net net = Net(topology);
+	cout << "success";
 	_getch();
     return 0;
 }
