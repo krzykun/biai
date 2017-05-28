@@ -14,7 +14,8 @@ public:
 	~Net();
 	void feedForward(const vector<double> &inputValues);
 	void backProp(const vector<double> &targetValues);
-	void getResults(vector<double> resultValues) const; 
+	void getResults(vector<double> resultValues) const;
+	double getRecentAverageError(void) const { return prv_recentAverageError; }
 private:
 	vector<Layer> prv_layers;
 	double prv_error;

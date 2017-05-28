@@ -5,19 +5,17 @@ Neuron::Neuron(unsigned howManyOutputs, const unsigned _myIndex) : prv_myIndex(_
 	for (unsigned con = 0; con < howManyOutputs; ++con)
 	{
 		prv_outputWeights.push_back(Connection());
+		prv_outputWeights.back().weight = randomWeight();
 	}
 	if (isDebug)
 	{
 		cout << "Made a neuron with weight: " << prv_outputValue << endl;
 	}
-	
 }
-
 
 Neuron::~Neuron()
 {
 }
-
 
 void Neuron::feedForward(const Layer &prevLayer)
 {
@@ -31,13 +29,11 @@ void Neuron::feedForward(const Layer &prevLayer)
 	prv_outputValue = Neuron::transferFunction(sum);
 }
 
-
 double Neuron::transferFunction(double x)
 {
-	//TODO Check other transfer functions
+	//TODO: Check other transfer functions
 	return tanh(x);
 }
-
 
 double Neuron::transferFunctionDerivative(double x)
 {
@@ -72,23 +68,23 @@ double Neuron::sumDOW(const Layer &nextLayer) const
 
 void Neuron::updateInputWeights(Layer &prevLayer)
 {
-	//The weights to be updated are in the Connection container
-	// in the neurons in the preceeding layer
+	// The weights to be updated are in the Connection container
+	// in the neurons in the preceding layer
 
 	for (unsigned whichNeuron = 0; whichNeuron < prevLayer.size(); ++whichNeuron)
 	{
 		Neuron &neuron = prevLayer[whichNeuron];
-		double oldDeltaWeight = neuron.prv_outputWeights[prv_myIndex].deltaweight;
+		double oldDeltaWeight = neuron.prv_outputWeights[prv_myIndex].deltaWeight;
 
 		double newDeltaWeight =
 			eta //train rate
 			* neuron.getOutputValue() //individual input
 			* prv_gradient
 			//a fraction of the previous delta weight
-			* alpha //momentum
+			+ alpha //momentum
 			* oldDeltaWeight;
 
-		neuron.prv_outputWeights[prv_myIndex].deltaweight = newDeltaWeight;
+		neuron.prv_outputWeights[prv_myIndex].deltaWeight = newDeltaWeight;
 		neuron.prv_outputWeights[prv_myIndex].weight += newDeltaWeight;
 	}
 }

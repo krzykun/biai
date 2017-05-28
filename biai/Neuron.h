@@ -5,6 +5,7 @@
 
 #include "Connection.h"
 
+
 using std::vector;
 using std::cout;
 using std::endl;
@@ -36,5 +37,5 @@ public:
 	//all neurons use the same value:
 	static double alpha;	//0.0 - n multiplier of the last weight change (momentum)
 	static double eta; //0.0 - 1.0 training rate
+	static double randomWeight(void) { return rand() / double(RAND_MAX); }
 };
-

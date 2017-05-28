@@ -9,12 +9,12 @@ Net::Net(const vector<unsigned> &topology)
 		unsigned howManyOutputs = layerIter == topology.size() - 1 ? 0 : topology[layerIter + 1];
 		for (unsigned neuronIter = 0; neuronIter <= topology[layerIter]; ++neuronIter)
 		{
-			if ((layerIter != howManyLayers - 1) || (neuronIter != topology[layerIter]))
-			{
+//			if ((layerIter != howManyLayers - 1) || (neuronIter != topology[layerIter]))
+//			{
 				prv_layers.back().push_back(Neuron(howManyOutputs, neuronIter));
-			}
-			else
-				cout << "I'm not creating useless neurons.\n";
+//			}
+//			else
+//				cout << "I'm not creating useless neurons.\n";
 		}
 		prv_layers.back().back().setOutputValue(1.0);
 	}
