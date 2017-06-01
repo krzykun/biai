@@ -97,7 +97,7 @@ void Net::backProp(const vector<double> &targetValues)
 	}
 }
 
-void Net::getResults(vector<double> resultValues) const
+void Net::getResults(vector<double> &resultValues) const
 {
 	resultValues.clear();
 
