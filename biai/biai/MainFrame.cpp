@@ -13,7 +13,7 @@ using namespace std;
 const bool isDebug = 1;
 
 [System::STAThread]
-void Main()
+void main()
 {
 	biai::MainForm mainForm;
 	mainForm.ShowDialog();

@@ -25,6 +25,7 @@ namespace biai {
 		MainForm(void)
 		{
 			InitializeComponent();
+			this->initializeChart();
 			//
 			//TODO: Add the constructor code here
 			//
@@ -47,6 +48,8 @@ namespace biai {
 	protected:
 	private: System::Windows::Forms::TextBox^  textBox1;
 	private: System::Windows::Forms::DataVisualization::Charting::Chart^  chart1;
+	private: System::Windows::Forms::GroupBox^  grpBoxOutput;
+	private: System::Windows::Forms::GroupBox^  grpBoxChart;
 
 
 	private:
@@ -65,14 +68,19 @@ namespace biai {
 			this->Start = (gcnew System::Windows::Forms::Button());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->chart1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
+			this->grpBoxOutput = (gcnew System::Windows::Forms::GroupBox());
+			this->grpBoxChart = (gcnew System::Windows::Forms::GroupBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart1))->BeginInit();
+			this->grpBoxOutput->SuspendLayout();
+			this->grpBoxChart->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// Start
 			// 
-			this->Start->Location = System::Drawing::Point(12, 12);
+			this->Start->Dock = System::Windows::Forms::DockStyle::Top;
+			this->Start->Location = System::Drawing::Point(0, 0);
 			this->Start->Name = L"Start";
-			this->Start->Size = System::Drawing::Size(75, 23);
+			this->Start->Size = System::Drawing::Size(779, 23);
 			this->Start->TabIndex = 1;
 			this->Start->Text = L"Start";
 			this->Start->UseVisualStyleBackColor = true;
@@ -80,34 +88,59 @@ namespace biai {
 			// 
 			// textBox1
 			// 
-			this->textBox1->Location = System::Drawing::Point(12, 41);
+			this->textBox1->Dock = System::Windows::Forms::DockStyle::Fill;
+			this->textBox1->Location = System::Drawing::Point(3, 16);
 			this->textBox1->Multiline = true;
 			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(260, 208);
+			this->textBox1->Size = System::Drawing::Size(773, 240);
 			this->textBox1->TabIndex = 2;
 			// 
 			// chart1
 			// 
-			this->chart1->Location = System::Drawing::Point(12, 266);
+			this->chart1->Dock = System::Windows::Forms::DockStyle::Fill;
+			this->chart1->Location = System::Drawing::Point(3, 16);
 			this->chart1->Name = L"chart1";
-			this->chart1->Size = System::Drawing::Size(260, 192);
+			this->chart1->Size = System::Drawing::Size(773, 333);
 			this->chart1->TabIndex = 3;
 			this->chart1->Text = L"chart1";
-			initializeChart();
+			// 
+			// grpBoxOutput
+			// 
+			this->grpBoxOutput->Controls->Add(this->textBox1);
+			this->grpBoxOutput->Dock = System::Windows::Forms::DockStyle::Top;
+			this->grpBoxOutput->Location = System::Drawing::Point(0, 23);
+			this->grpBoxOutput->Name = L"grpBoxOutput";
+			this->grpBoxOutput->Size = System::Drawing::Size(779, 259);
+			this->grpBoxOutput->TabIndex = 4;
+			this->grpBoxOutput->TabStop = false;
+			this->grpBoxOutput->Text = L"Output";
+			// 
+			// grpBoxChart
+			// 
+			this->grpBoxChart->Controls->Add(this->chart1);
+			this->grpBoxChart->Dock = System::Windows::Forms::DockStyle::Fill;
+			this->grpBoxChart->Location = System::Drawing::Point(0, 282);
+			this->grpBoxChart->Name = L"grpBoxChart";
+			this->grpBoxChart->Size = System::Drawing::Size(779, 352);
+			this->grpBoxChart->TabIndex = 5;
+			this->grpBoxChart->TabStop = false;
+			this->grpBoxChart->Text = L"Visualization";
 			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(287, 470);
-			this->Controls->Add(this->chart1);
-			this->Controls->Add(this->textBox1);
+			this->ClientSize = System::Drawing::Size(779, 634);
+			this->Controls->Add(this->grpBoxChart);
+			this->Controls->Add(this->grpBoxOutput);
 			this->Controls->Add(this->Start);
 			this->Name = L"MainForm";
 			this->Text = L"MyForm";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart1))->EndInit();
+			this->grpBoxOutput->ResumeLayout(false);
+			this->grpBoxOutput->PerformLayout();
+			this->grpBoxChart->ResumeLayout(false);
 			this->ResumeLayout(false);
-			this->PerformLayout();
 
 		}
 
