@@ -46,6 +46,8 @@ namespace biai {
 
 	protected:
 	private: System::Windows::Forms::TextBox^  textBox1;
+	private: System::Windows::Forms::DataVisualization::Charting::Chart^  chart1;
+
 
 	private:
 		/// <summary>
@@ -62,6 +64,8 @@ namespace biai {
 		{
 			this->Start = (gcnew System::Windows::Forms::Button());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->chart1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart1))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// Start
@@ -82,15 +86,26 @@ namespace biai {
 			this->textBox1->Size = System::Drawing::Size(260, 208);
 			this->textBox1->TabIndex = 2;
 			// 
+			// chart1
+			// 
+			this->chart1->Location = System::Drawing::Point(12, 266);
+			this->chart1->Name = L"chart1";
+			this->chart1->Size = System::Drawing::Size(260, 192);
+			this->chart1->TabIndex = 3;
+			this->chart1->Text = L"chart1";
+			initializeChart();
+			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(284, 261);
+			this->ClientSize = System::Drawing::Size(287, 470);
+			this->Controls->Add(this->chart1);
 			this->Controls->Add(this->textBox1);
 			this->Controls->Add(this->Start);
 			this->Name = L"MainForm";
 			this->Text = L"MyForm";
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -155,5 +170,35 @@ namespace biai {
 		System::String^ MyString = gcnew System::String(text.c_str());
 		this->textBox1->Text = MyString;
 	}
-	};
+	private: int function1(int x) {
+		return 0.7*x;
+	}
+	private: int function2(int x) {
+		return 6 + log(x);
+	}
+	
+
+	private: System::Void initializeChart() {
+		this->chart1->ChartAreas->Add("area");
+		this->chart1->ChartAreas["area"]->AxisX->Minimum = 0;
+		this->chart1->ChartAreas["area"]->AxisX->Maximum = 20;
+		this->chart1->ChartAreas["area"]->AxisX->Interval = 1;
+		this->chart1->ChartAreas["area"]->AxisY->Minimum = 0;
+		this->chart1->ChartAreas["area"]->AxisY->Interval = 10;
+
+		this->chart1->Series->Add("function1");
+		this->chart1->Series->Add("function2");
+		this->chart1->Series["function1"]->Color = System::Drawing::Color::Red;
+		this->chart1->Series["function2"]->Color = System::Drawing::Color::Green;
+		this->chart1->Series["function1"]->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Line;
+		this->chart1->Series["function2"]->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Line;
+
+		for (int i = 0; i < 20; i++) {
+			this->chart1->Series["function1"]->Points->AddXY(i, function1(i));
+			this->chart1->Series["function2"]->Points->AddXY(i, function2(i));
+		}
+	}
+
+
+};
 }
