@@ -160,7 +160,7 @@ namespace biai {
 
 	private: System::Void Start_Click(System::Object^  sender, System::EventArgs^  e) {
 		string text = "";
-		TrainingData trainData("trainingData.txt");
+		TrainingData trainData("trainingCoordinates.txt");
 
 		// e.g., { 3, 2, 1 }
 		vector<unsigned> topology;
@@ -194,7 +194,7 @@ namespace biai {
 			// Collect the net's actual output results:
 			myNet.getResults(resultVals);
 			text += showVectorVals("Outputs:", resultVals);
-			this->chart1->Series["XORData"]->Points->AddXY(trainingPass, resultVals[0]);
+			this->chart1->Series["NetData"]->Points->AddXY(trainingPass, resultVals[0]);
 			text += "\t\t";
 
 			// Train the net what the outputs should have been:
@@ -229,35 +229,33 @@ namespace biai {
 	private: System::Void initializeChart() {
 		this->chart1->ChartAreas->Add("area");
 		this->chart1->ChartAreas["area"]->AxisX->Minimum = 0;
-		this->chart1->ChartAreas["area"]->AxisX->Maximum = 2000;
-		this->chart1->ChartAreas["area"]->AxisX->Interval = 100;
-		this->chart1->ChartAreas["area"]->AxisY->Minimum = -0.2;
-		this->chart1->ChartAreas["area"]->AxisY->Interval = 0.1;
-		this->chart1->ChartAreas["area"]->AxisY->Maximum = 1.2;
+		this->chart1->ChartAreas["area"]->AxisX->Maximum = 100;
+		this->chart1->ChartAreas["area"]->AxisX->Interval = 10;
+		this->chart1->ChartAreas["area"]->AxisY->Minimum = 0;
+		this->chart1->ChartAreas["area"]->AxisY->Maximum = 100;
+		this->chart1->ChartAreas["area"]->AxisY->Interval = 10;
 
 		this->chart1->Series->Add("function1");
 		this->chart1->Series->Add("function2");
 		this->chart1->Series->Add("kromka");
-		this->chart1->Series->Add("XORData");
+		this->chart1->Series->Add("NetData");
 		this->chart1->Series["function1"]->Color = System::Drawing::Color::Red;
 		this->chart1->Series["function2"]->Color = System::Drawing::Color::Green;
 		this->chart1->Series["kromka"]->Color = System::Drawing::Color::YellowGreen;
-		this->chart1->Series["XORData"]->Color = System::Drawing::Color::BurlyWood;
+		this->chart1->Series["NetData"]->Color = System::Drawing::Color::BurlyWood;
 		this->chart1->Series["function1"]->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Line;
 		this->chart1->Series["function2"]->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Point;
 		this->chart1->Series["kromka"]->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Point;
-		this->chart1->Series["XORData"]->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Point;
+		this->chart1->Series["NetData"]->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Point;
 
-		for (int i = 0; i < 20; i++) {
+		/*for (int i = 0; i < 20; i++) {
 			this->chart1->Series["function1"]->Points->AddXY(i, function1(i));
 			this->chart1->Series["function2"]->Points->AddXY(i, function2(i));
-		}
+		}*/
 
 		/*for (double dbIter = 0.0; dbIter < 20; dbIter += 1.0) {
 			this->chart1->Series["kromka"]->Points->AddXY(dbIter, squareFunction(dbIter));
 		}*/
 	}
-
-
 };
 }

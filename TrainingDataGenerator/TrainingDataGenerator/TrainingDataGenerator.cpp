@@ -9,12 +9,17 @@
 
 using namespace std;
 
+double normalize(double x, double range)
+{
+	return x / range;
+}
+
 int main()
 {
 
 	enum generateData { XOR, XYcoordinates };
 	ofstream file;
-	file.open("trainingData.txt");
+	file.open("trainingCoordinates.txt");
 
 	generateData whatShouldIGenerate = XYcoordinates;
 
@@ -33,10 +38,29 @@ int main()
 	}
 	else
 		if (whatShouldIGenerate == XYcoordinates) {
+			// Lets assume that we are doing our calcultaions in 100x100 unit space.
+			//http://www.cplusplus.com/reference/random/ might be a good idea to implement here
+			// for now lets also assume, that the speed is 1 unit for a measurement period
 
+			int a = 0;
+			int range_x = 100;
+			int range_y = 100;
+
+			for (a = 0; a < 100; a++)
+			{
+				double new_x = a;
+				double new_y = a;
+				double next_y = a + 1;
+				//double new_x = (static_cast<double> (rand() % 10001)) / 100; //0 - 100 is our range, and we assume 2 decimal places
+				file << "in: " << normalize(new_x, range_x) << " " << normalize(new_y, range_y) << endl;
+				file << "out: " << normalize(a + 1, range_x) << " " << normalize(next_y, range_y) << endl;
+				cout << "in: " << normalize(new_x, range_x) << " " << normalize(new_y, range_y) << endl;
+				cout << "out: " << normalize(a + 1, range_x) << " " << normalize(next_y, range_y) << endl;
+			}
 		}
 
-
+	char wait;
+	cin >> wait;
 	file.close();	
 	return 0;
 }
