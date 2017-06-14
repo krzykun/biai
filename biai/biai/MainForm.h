@@ -124,6 +124,9 @@ namespace biai {
 		}
 
 #pragma endregion
+
+	private: vector<double>* NeuralNetworkResultsPointer;
+
 	private: System::Void Start_Click(System::Object^  sender, System::EventArgs^  e) {
 		string text = "";
 		TrainingData trainData("trainingData.txt");
@@ -135,6 +138,7 @@ namespace biai {
 		Net myNet(topology);
 
 		vector<double> inputVals, targetVals, resultVals;
+		this->NeuralNetworkResultsPointer = &resultVals;
 		int trainingPass = 0;
 
 
@@ -157,6 +161,11 @@ namespace biai {
 			myNet.getResults(resultVals);
 			text += showVectorVals("Outputs:", resultVals);
 
+			for each (double singleResult in resultVals)
+			{
+
+			}
+
 			// Train the net what the outputs should have been:
 			trainData.getTargetOutputs(targetVals);
 			text += showVectorVals("Targets:", targetVals);
@@ -171,6 +180,12 @@ namespace biai {
 		}
 		System::String^ MyString = gcnew System::String(text.c_str());
 		this->textBox1->Text = MyString;
+
+		for (int i = 0; i < 2000; ++i)
+		{
+			this->chart1->Series["XORData"]->Points->AddXY(i, (*NeuralNetworkResultsPointer)[i]);
+		}
+
 	}
 	private: int function1(int x) {
 		return 0.7*x;
@@ -187,7 +202,7 @@ namespace biai {
 	private: System::Void initializeChart() {
 		this->chart1->ChartAreas->Add("area");
 		this->chart1->ChartAreas["area"]->AxisX->Minimum = 0;
-		this->chart1->ChartAreas["area"]->AxisX->Maximum = 20;
+		this->chart1->ChartAreas["area"]->AxisX->Maximum = 200;
 		this->chart1->ChartAreas["area"]->AxisX->Interval = 1;
 		this->chart1->ChartAreas["area"]->AxisY->Minimum = 0;
 		this->chart1->ChartAreas["area"]->AxisY->Interval = 100;
@@ -214,12 +229,6 @@ namespace biai {
 		/*for (double dbIter = 0.0; dbIter < 20; dbIter += 1.0) {
 			this->chart1->Series["kromka"]->Points->AddXY(dbIter, squareFunction(dbIter));
 		}*/
-
-		for each ( var in collection_to_loop)
-		{
-
-		}
-
 	}
 
 
