@@ -137,6 +137,8 @@ namespace biai {
 		vector<double> inputVals, targetVals, resultVals;
 		int trainingPass = 0;
 
+
+
 		while (!trainData.isEof()) {
 			if (trainingPass % 500 == 0)
 				text += "aa:";
@@ -176,6 +178,10 @@ namespace biai {
 	private: int function2(int x) {
 		return 6 + log(x);
 	}
+
+	private: double squareFunction(double x) {
+		return 2 * x*x + 5 * x;
+	}
 	
 
 	private: System::Void initializeChart() {
@@ -184,19 +190,36 @@ namespace biai {
 		this->chart1->ChartAreas["area"]->AxisX->Maximum = 20;
 		this->chart1->ChartAreas["area"]->AxisX->Interval = 1;
 		this->chart1->ChartAreas["area"]->AxisY->Minimum = 0;
-		this->chart1->ChartAreas["area"]->AxisY->Interval = 10;
+		this->chart1->ChartAreas["area"]->AxisY->Interval = 100;
+		this->chart1->ChartAreas["area"]->AxisY->Maximum = 1000;
 
 		this->chart1->Series->Add("function1");
 		this->chart1->Series->Add("function2");
+		this->chart1->Series->Add("kromka");
+		this->chart1->Series->Add("XORData");
 		this->chart1->Series["function1"]->Color = System::Drawing::Color::Red;
 		this->chart1->Series["function2"]->Color = System::Drawing::Color::Green;
+		this->chart1->Series["kromka"]->Color = System::Drawing::Color::BlanchedAlmond;
+		this->chart1->Series["XORData"]->Color = System::Drawing::Color::DarkMagenta;
 		this->chart1->Series["function1"]->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Line;
-		this->chart1->Series["function2"]->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Line;
+		this->chart1->Series["function2"]->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Point;
+		this->chart1->Series["kromka"]->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Point;
+		this->chart1->Series["XORData"]->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Point;
 
 		for (int i = 0; i < 20; i++) {
 			this->chart1->Series["function1"]->Points->AddXY(i, function1(i));
 			this->chart1->Series["function2"]->Points->AddXY(i, function2(i));
 		}
+
+		/*for (double dbIter = 0.0; dbIter < 20; dbIter += 1.0) {
+			this->chart1->Series["kromka"]->Points->AddXY(dbIter, squareFunction(dbIter));
+		}*/
+
+		for each ( var in collection_to_loop)
+		{
+
+		}
+
 	}
 
 
