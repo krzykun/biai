@@ -158,8 +158,6 @@ namespace biai {
 
 #pragma endregion
 
-	private: vector<double>* NeuralNetworkResultsPointer;
-
 	private: System::Void Start_Click(System::Object^  sender, System::EventArgs^  e) {
 		string text = "";
 		TrainingData trainData("trainingData.txt");
@@ -171,7 +169,6 @@ namespace biai {
 		Net myNet(topology);
 
 		vector<double> inputVals, targetVals, resultVals;
-		this->NeuralNetworkResultsPointer = &resultVals;
 		int trainingPass = 0;
 
 
@@ -197,12 +194,8 @@ namespace biai {
 			// Collect the net's actual output results:
 			myNet.getResults(resultVals);
 			text += showVectorVals("Outputs:", resultVals);
+			this->chart1->Series["XORData"]->Points->AddXY(trainingPass, resultVals[0]);
 			text += "\t\t";
-
-			for each (double singleResult in resultVals)
-			{
-
-			}
 
 			// Train the net what the outputs should have been:
 			trainData.getTargetOutputs(targetVals);
@@ -219,13 +212,8 @@ namespace biai {
 		}
 		System::String^ MyString = gcnew System::String(text.c_str());
 		this->textBox1->Text = MyString;
-
-		for (int i = 0; i < 2000; ++i)
-		{
-			this->chart1->Series["XORData"]->Points->AddXY(i, (*NeuralNetworkResultsPointer)[i]);
-		}
-
 	}
+
 	private: int function1(int x) {
 		return 0.7*x;
 	}
@@ -241,11 +229,11 @@ namespace biai {
 	private: System::Void initializeChart() {
 		this->chart1->ChartAreas->Add("area");
 		this->chart1->ChartAreas["area"]->AxisX->Minimum = 0;
-		this->chart1->ChartAreas["area"]->AxisX->Maximum = 200;
-		this->chart1->ChartAreas["area"]->AxisX->Interval = 1;
-		this->chart1->ChartAreas["area"]->AxisY->Minimum = 0;
-		this->chart1->ChartAreas["area"]->AxisY->Interval = 100;
-		this->chart1->ChartAreas["area"]->AxisY->Maximum = 1000;
+		this->chart1->ChartAreas["area"]->AxisX->Maximum = 2000;
+		this->chart1->ChartAreas["area"]->AxisX->Interval = 100;
+		this->chart1->ChartAreas["area"]->AxisY->Minimum = -0.2;
+		this->chart1->ChartAreas["area"]->AxisY->Interval = 0.1;
+		this->chart1->ChartAreas["area"]->AxisY->Maximum = 1.2;
 
 		this->chart1->Series->Add("function1");
 		this->chart1->Series->Add("function2");
@@ -253,8 +241,8 @@ namespace biai {
 		this->chart1->Series->Add("XORData");
 		this->chart1->Series["function1"]->Color = System::Drawing::Color::Red;
 		this->chart1->Series["function2"]->Color = System::Drawing::Color::Green;
-		this->chart1->Series["kromka"]->Color = System::Drawing::Color::BlanchedAlmond;
-		this->chart1->Series["XORData"]->Color = System::Drawing::Color::DarkMagenta;
+		this->chart1->Series["kromka"]->Color = System::Drawing::Color::YellowGreen;
+		this->chart1->Series["XORData"]->Color = System::Drawing::Color::BurlyWood;
 		this->chart1->Series["function1"]->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Line;
 		this->chart1->Series["function2"]->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Point;
 		this->chart1->Series["kromka"]->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Point;
