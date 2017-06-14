@@ -18,12 +18,13 @@ int main()
 {
 
 	enum generateData { XOR, XYcoordinates };
-	ofstream file;
-	file.open("trainingCoordinates.txt");
+	ofstream datafile;
+	ofstream testfile;
+	datafile.open("trainingCoordinates.txt");
 
 	generateData whatShouldIGenerate = XYcoordinates;
 
-	file << "topology: 2 4 1" << endl;
+	datafile << "topology: 2 4 1" << endl;
 
 	if (whatShouldIGenerate == XOR) {
 		// XOR for tests
@@ -32,8 +33,8 @@ int main()
 			int a = (int)(2.0* rand() / double(RAND_MAX));
 			int b = (int)(2.0* rand() / double(RAND_MAX));
 			int c = a ^ b;
-			file << "in: " << a << ".0 " << b << ".0" << endl;
-			file << "out: " << c << ".0" << endl;
+			datafile << "in: " << a << ".0 " << b << ".0" << endl;
+			datafile << "out: " << c << ".0" << endl;
 		}
 	}
 	else
@@ -52,16 +53,27 @@ int main()
 				double new_y = a;
 				double next_y = a + 1;
 				//double new_x = (static_cast<double> (rand() % 10001)) / 100; //0 - 100 is our range, and we assume 2 decimal places
-				file << "in: " << normalize(new_x, range_x) << " " << normalize(new_y, range_y) << endl;
-				file << "out: " << normalize(a + 1, range_x) << " " << normalize(next_y, range_y) << endl;
-				cout << "in: " << normalize(new_x, range_x) << " " << normalize(new_y, range_y) << endl;
-				cout << "out: " << normalize(a + 1, range_x) << " " << normalize(next_y, range_y) << endl;
+
+				if ((a % 5) == 0)
+				{
+					datafile << "in: " << normalize(new_x, range_x) << " " << normalize(new_y, range_y) << endl;
+					datafile << "out: " << normalize(a + 1, range_x) << " " << normalize(next_y, range_y) << endl;
+					cout << "in: " << normalize(new_x, range_x) << " " << normalize(new_y, range_y) << endl;
+					cout << "out: " << normalize(a + 1, range_x) << " " << normalize(next_y, range_y) << endl;
+				}
+				else
+				{
+					datafile << "in: " << normalize(new_x, range_x) << " " << normalize(new_y, range_y) << endl;
+					datafile << "out: " << normalize(a + 1, range_x) << " " << normalize(next_y, range_y) << endl;
+					cout << "in: " << normalize(new_x, range_x) << " " << normalize(new_y, range_y) << endl;
+					cout << "out: " << normalize(a + 1, range_x) << " " << normalize(next_y, range_y) << endl;
+				}
 			}
 		}
 
 	char wait;
 	cin >> wait;
-	file.close();	
+	datafile.close();	
 	return 0;
 }
 

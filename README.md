@@ -7,5 +7,7 @@ Done:
 
 TODO:
 * Use data for object's trajectory
+* dividing data into test and learning data
+* try out different trajectories
 * Check out other functions for back propagation
 * Draw results chart
