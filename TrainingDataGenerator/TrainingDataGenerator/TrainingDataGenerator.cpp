@@ -54,7 +54,7 @@ int main()
 				double next_y = a + 1;
 				//double new_x = (static_cast<double> (rand() % 10001)) / 100; //0 - 100 is our range, and we assume 2 decimal places
 
-				if ((a % 5) == 0)
+				if ((a % 5) == 0) // 20 tearning, 80 test
 				{
 					datafile << "in: " << normalize(new_x, range_x) << " " << normalize(new_y, range_y) << endl;
 					datafile << "out: " << normalize(a + 1, range_x) << " " << normalize(next_y, range_y) << endl;
@@ -63,8 +63,8 @@ int main()
 				}
 				else
 				{
-					datafile << "in: " << normalize(new_x, range_x) << " " << normalize(new_y, range_y) << endl;
-					datafile << "out: " << normalize(a + 1, range_x) << " " << normalize(next_y, range_y) << endl;
+					testfile << "in: " << normalize(new_x, range_x) << " " << normalize(new_y, range_y) << endl;
+					testfile << "out: " << normalize(a + 1, range_x) << " " << normalize(next_y, range_y) << endl;
 					cout << "in: " << normalize(new_x, range_x) << " " << normalize(new_y, range_y) << endl;
 					cout << "out: " << normalize(a + 1, range_x) << " " << normalize(next_y, range_y) << endl;
 				}

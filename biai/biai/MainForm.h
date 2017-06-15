@@ -161,6 +161,7 @@ namespace biai {
 	private: System::Void Start_Click(System::Object^  sender, System::EventArgs^  e) {
 		string text = "";
 		TrainingData trainData("trainingCoordinates.txt");
+		TestData testData("testingCoordinates.txt");
 
 		// e.g., { 3, 2, 1 }
 		vector<unsigned> topology;
@@ -212,6 +213,9 @@ namespace biai {
 		}
 		System::String^ MyString = gcnew System::String(text.c_str());
 		this->textBox1->Text = MyString;
+
+		while(!testdata.Is)
+
 	}
 
 	private: int function1(int x) {
