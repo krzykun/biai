@@ -162,7 +162,6 @@ namespace biai {
 		string text = "";
 		TrainingData trainData("trainingData.txt");
 
-		// e.g., { 3, 2, 1 }
 		vector<unsigned> topology;
 		trainData.getTopology(topology);
 
@@ -170,45 +169,45 @@ namespace biai {
 
 		vector<double> inputVals, targetVals, resultVals;
 		int trainingPass = 0;
-
-
-
 		while (!trainData.isEof()) {
-			if (trainingPass % 500 == 0)
-				text += "aa:";
+			string text2 = "";
 			++trainingPass;
-			text += "\t\t";
-			text += "Pass";
-			text += to_string(trainingPass);
-			text += "\t\t";
+			text2 += "\t\t";
+			text2 += "Pass";
+			text2 += to_string(trainingPass);
+			text2 += "\t\t";
 
 			// Get new input data and feed it forward:
 			if (trainData.getNextInputs(inputVals) != topology[0]) {
 				break;
 			}
 
-			text += showVectorVals("Inputs:", inputVals);
+			text2 += showVectorVals("Inputs:", inputVals);
 			myNet.feedForward(inputVals);
-			text += "\t\t";
+			text2 += "\t\t";
 
 			// Collect the net's actual output results:
 			myNet.getResults(resultVals);
-			text += showVectorVals("Outputs:", resultVals);
-			this->chart1->Series["XORData"]->Points->AddXY(trainingPass, resultVals[0]);
-			text += "\t\t";
+			text2 += showVectorVals("Outputs:", resultVals);
+			//this->chart1->Series["data"]->Points->AddXY(trainingPass, resultVals[0]);
+			text2 += "\t\t";
 
 			// Train the net what the outputs should have been:
 			trainData.getTargetOutputs(targetVals);
-			text += showVectorVals("Targets:", targetVals);
+			text2 += showVectorVals("Targets:", targetVals);
 			//assert(targetVals.size() == topology.back());
-			text += "\t\t";
+			text2 += "\t\t";
 
 			myNet.backProp(targetVals);
 
 			// Report how well the training is working, average over recent samples:
-			text += "Net recent average error: ";
-			text += to_string(myNet.getRecentAverageError());
-			text += "\r\n";
+			text2 += "Net recent average error: ";
+			double error = myNet.getRecentAverageError();
+			text2 += to_string(error);
+			this->chart1->Series["error"]->Points->AddXY(trainingPass, error);
+			text2 += "\r\n";
+			if (trainingPass % 50 == 0)
+				text += text2;
 		}
 		System::String^ MyString = gcnew System::String(text.c_str());
 		this->textBox1->Text = MyString;
@@ -237,16 +236,16 @@ namespace biai {
 
 		this->chart1->Series->Add("function1");
 		this->chart1->Series->Add("function2");
-		this->chart1->Series->Add("kromka");
-		this->chart1->Series->Add("XORData");
+		this->chart1->Series->Add("error");
+		this->chart1->Series->Add("data");
 		this->chart1->Series["function1"]->Color = System::Drawing::Color::Red;
 		this->chart1->Series["function2"]->Color = System::Drawing::Color::Green;
-		this->chart1->Series["kromka"]->Color = System::Drawing::Color::YellowGreen;
-		this->chart1->Series["XORData"]->Color = System::Drawing::Color::BurlyWood;
+		this->chart1->Series["error"]->Color = System::Drawing::Color::YellowGreen;
+		this->chart1->Series["data"]->Color = System::Drawing::Color::BurlyWood;
 		this->chart1->Series["function1"]->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Line;
 		this->chart1->Series["function2"]->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Point;
-		this->chart1->Series["kromka"]->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Point;
-		this->chart1->Series["XORData"]->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Point;
+		this->chart1->Series["error"]->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Line;
+		this->chart1->Series["data"]->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Line;
 
 		for (int i = 0; i < 20; i++) {
 			this->chart1->Series["function1"]->Points->AddXY(i, function1(i));
