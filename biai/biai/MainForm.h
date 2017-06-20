@@ -49,7 +49,7 @@ namespace biai {
 	private: System::Windows::Forms::GroupBox^  grpBoxInputs;
 
 	private: System::Windows::Forms::Panel^  panel1;
-
+	private: Net* NeuralNetwork; // Pointer to the not-managed-code network, use "Net NetworkHandle" variable while in learning/testing instead.
 
 
 	private:
@@ -204,7 +204,13 @@ namespace biai {
 		vector<unsigned> topology;
 		trainData.getTopology(topology);
 
-		Net myNet(topology);
+		if (NeuralNetwork == nullptr)
+		{
+			NeuralNetwork = new Net(topology);
+		}
+
+		Net NetworkHandle = *NeuralNetwork; //Use this variable instead of the pointer from the main class for simplified code look
+		
 
 		vector<double> inputVals, targetVals, resultVals;
 		unsigned trainingPass = 0;
@@ -229,11 +235,11 @@ namespace biai {
 			}
 
 			text += showVectorVals("Inputs:", inputVals);
-			myNet.feedForward(inputVals);
+			NetworkHandle.feedForward(inputVals);
 			text += "\t\t";
 
 			// Collect the net's actual output results:
-			myNet.getResults(resultVals);
+			NetworkHandle.getResults(resultVals);
 			text += showVectorVals("Outputs:", resultVals);
 			this->chart1->Series["NetData"]->Points->AddXY(trainingPass, resultVals[0] * 100);
 			text += "\t\t";
@@ -244,11 +250,11 @@ namespace biai {
 			//assert(targetVals.size() == topology.back());
 			text += "\t\t";
 
-			myNet.backProp(targetVals);
+			NetworkHandle.backProp(targetVals);
 
 			// Report how well the training is working, average over recent samples:
 			text += "Net recent average error: ";
-			text += to_string(myNet.getRecentAverageError());
+			text += to_string(NetworkHandle.getRecentAverageError());
 			text += "\r\n";
 		}
 		System::String^ MyString = gcnew System::String(text.c_str());
@@ -276,18 +282,18 @@ namespace biai {
 			}
 
 			TestLogString += showVectorVals("Inputs:", inputVals);
-			myNet.feedForward(inputVals);
+			NetworkHandle.feedForward(inputVals);
 			TestLogString += "\t\t";
 
 			// Collect the net's actual output results:
-			myNet.getResults(resultVals);
+			NetworkHandle.getResults(resultVals);
 			TestLogString += showVectorVals("Outputs:", resultVals);
 			this->chart1->Series["NetData"]->Points->AddXY(testPass, resultVals[0] * 100);
 			TestLogString += "\t\t";
 
 			// Report how well the training is working, average over recent samples:
 			TestLogString += "Net recent average error: ";
-			TestLogString += to_string(myNet.getRecentAverageError());
+			TestLogString += to_string(NetworkHandle.getRecentAverageError());
 			TestLogString += "\r\n";
 		}
 
