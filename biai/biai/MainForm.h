@@ -198,7 +198,6 @@ namespace biai {
 	private: System::Void Start_Click(System::Object^  sender, System::EventArgs^  e) {
 		string text = "";
 		TrainingData trainData("trainingCoordinates.txt");
-		TrainingData testData("testingCoordinates.txt");
 
 		// e.g., { 3, 2, 1 }
 		vector<unsigned> topology;
@@ -211,10 +210,8 @@ namespace biai {
 
 		Net NetworkHandle = *NeuralNetwork; //Use this variable instead of the pointer from the main class for simplified code look
 		
-
 		vector<double> inputVals, targetVals, resultVals;
 		unsigned trainingPass = 0;
-		unsigned testPass = 0;
 
 		//
 		//Learning
@@ -241,7 +238,7 @@ namespace biai {
 			// Collect the net's actual output results:
 			NetworkHandle.getResults(resultVals);
 			text += showVectorVals("Outputs:", resultVals);
-			this->chart1->Series["NetData"]->Points->AddXY(trainingPass, resultVals[0] * 100);
+			this->chart1->Series["LearningData"]->Points->AddXY(trainingPass, resultVals[0] * 100);
 			text += "\t\t";
 
 			// Train the net what the outputs should have been:
@@ -259,46 +256,6 @@ namespace biai {
 		}
 		System::String^ MyString = gcnew System::String(text.c_str());
 		this->textBox1->Text = MyString;
-
-		//
-		//Testing
-		//
-
-		string TestLogString = "";
-
-		while (!testData.isEof())
-		{
-			if (testPass % 500 == 0)
-				TestLogString += "aa:";
-			++testPass;
-			TestLogString += "\t\t";
-			TestLogString += "Pass";
-			TestLogString += to_string(testPass);
-			TestLogString += "\t\t";
-
-			// Get new input data and feed it forward:
-			if (testData.getNextInputs(inputVals) != topology[0]) {
-				break;
-			}
-
-			TestLogString += showVectorVals("Inputs:", inputVals);
-			NetworkHandle.feedForward(inputVals);
-			TestLogString += "\t\t";
-
-			// Collect the net's actual output results:
-			NetworkHandle.getResults(resultVals);
-			TestLogString += showVectorVals("Outputs:", resultVals);
-			this->chart1->Series["NetData"]->Points->AddXY(testPass, resultVals[0] * 100);
-			TestLogString += "\t\t";
-
-			// Report how well the training is working, average over recent samples:
-			TestLogString += "Net recent average error: ";
-			TestLogString += to_string(NetworkHandle.getRecentAverageError());
-			TestLogString += "\r\n";
-		}
-
-		System::String^ TestManagedString = gcnew System::String(TestLogString.c_str());
-		this->textBox1->Text = TestManagedString;
 
 	}
 
@@ -323,18 +280,21 @@ namespace biai {
 		this->chart1->ChartAreas["area"]->AxisY->Maximum = 100;
 		this->chart1->ChartAreas["area"]->AxisY->Interval = 10;
 
-		this->chart1->Series->Add("function1");
-		this->chart1->Series->Add("function2");
-		this->chart1->Series->Add("kromka");
-		this->chart1->Series->Add("NetData");
-		this->chart1->Series["function1"]->Color = System::Drawing::Color::Red;
-		this->chart1->Series["function2"]->Color = System::Drawing::Color::Green;
-		this->chart1->Series["kromka"]->Color = System::Drawing::Color::YellowGreen;
-		this->chart1->Series["NetData"]->Color = System::Drawing::Color::BurlyWood;
-		this->chart1->Series["function1"]->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Line;
-		this->chart1->Series["function2"]->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Point;
-		this->chart1->Series["kromka"]->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Point;
-		this->chart1->Series["NetData"]->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Point;
+		//this->chart1->Series->Add("function1");
+		//this->chart1->Series->Add("function2");
+		//this->chart1->Series->Add("kromka");
+		this->chart1->Series->Add("LearningData");
+		this->chart1->Series->Add("TestData");
+		//this->chart1->Series["function1"]->Color = System::Drawing::Color::Red;
+		//this->chart1->Series["function2"]->Color = System::Drawing::Color::Green;
+		//this->chart1->Series["kromka"]->Color = System::Drawing::Color::YellowGreen;
+		this->chart1->Series["LearningData"]->Color = System::Drawing::Color::BurlyWood;
+		this->chart1->Series["TestData"]->Color = System::Drawing::Color::Aquamarine;
+		//this->chart1->Series["function1"]->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Line;
+		//this->chart1->Series["function2"]->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Point;
+		//this->chart1->Series["kromka"]->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Point;
+		this->chart1->Series["LearningData"]->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Point;
+		this->chart1->Series["TestData"]->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Point;
 
 		/*for (int i = 0; i < 20; i++) {
 			this->chart1->Series["function1"]->Points->AddXY(i, function1(i));
@@ -345,8 +305,62 @@ namespace biai {
 			this->chart1->Series["kromka"]->Points->AddXY(dbIter, squareFunction(dbIter));
 		}*/
 	}
-private: System::Void OnClick_btnTest(System::Object^  sender, System::EventArgs^  e) {
 
-}
-};
+		private: System::Void testhandling() {
+
+		}
+
+		private: System::Void OnClick_btnTest(System::Object^  sender, System::EventArgs^  e) {
+			TrainingData testData("testingCoordinates.txt");
+			unsigned testPass = 0;
+			vector<double> inputVals, targetVals, resultVals;
+
+			if (NeuralNetwork == nullptr)
+			{
+				cout << "There is no neural network to test. Create and teach the net first." << endl;
+				return;
+			}
+
+			Net NetworkHandle = *NeuralNetwork; //Use this variable instead of the pointer from the main class for simplified code look
+			string TestLogString = "";
+
+			while (!testData.isEof())
+			{
+				if (testPass % 500 == 0)
+					cout << "500 test cases ..." << endl;
+				++testPass;
+				TestLogString += "\t\t";
+				TestLogString += "Pass";
+				TestLogString += to_string(testPass);
+				TestLogString += "\t\t";
+
+				// Get new input data and feed it forward:
+				testData.getNextInputs(inputVals);
+				//if (testData.getNextInputs(inputVals) != topology[0]) {
+				//	break;
+				//}
+
+				TestLogString += showVectorVals("Inputs:", inputVals);
+				NetworkHandle.feedForward(inputVals);
+				TestLogString += "\t\t";
+
+				// Collect the net's actual output results:
+				NetworkHandle.getResults(resultVals);
+				TestLogString += showVectorVals("Outputs:", resultVals);
+				this->chart1->Series["TestData"]->Points->AddXY(testPass, resultVals[0] * 100);
+				TestLogString += "\t\t";
+
+				// Report how well the training is working, average over recent samples:
+				TestLogString += "Net recent average error: ";
+				TestLogString += to_string(NetworkHandle.getRecentAverageError());
+				TestLogString += "\r\n";
+			}
+
+			System::String^ TestManagedString = gcnew System::String(TestLogString.c_str());
+			this->textBox1->Text = TestManagedString;
+
+		}
+
+
+	};
 }
