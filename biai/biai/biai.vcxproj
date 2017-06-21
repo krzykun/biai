@@ -143,13 +143,24 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="expression_parser_cpp\error.cpp" />
+    <ClCompile Include="expression_parser_cpp\functions.cpp" />
+    <ClCompile Include="expression_parser_cpp\parser.cpp" />
+    <ClCompile Include="expression_parser_cpp\variablelist.cpp" />
     <ClCompile Include="MainFrame.cpp" />
     <ClCompile Include="Net.cpp" />
     <ClCompile Include="Neuron.cpp" />
+    <ClCompile Include="Expression.cpp" />
     <ClCompile Include="TrainingData.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Connection.h" />
+    <ClInclude Include="Expression.h" />
+    <ClInclude Include="expression_parser_cpp\constants.h" />
+    <ClInclude Include="expression_parser_cpp\error.h" />
+    <ClInclude Include="expression_parser_cpp\functions.h" />
+    <ClInclude Include="expression_parser_cpp\parser.h" />
+    <ClInclude Include="expression_parser_cpp\variablelist.h" />
     <ClInclude Include="MainForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>

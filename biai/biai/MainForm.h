@@ -2,12 +2,14 @@
 #include "Net.h"
 #include "Neuron.h"
 #include "TrainingData.h"
+#include "Expression.h"
 #include <vector>
 #include <string>
 #include <stdio.h>
 #include <iostream>
 #include <vector>
 #include <conio.h>
+#include <msclr\marshal_cppstd.h>
 namespace biai {
 
 	using namespace System::ComponentModel;
@@ -15,6 +17,7 @@ namespace biai {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::Runtime::InteropServices;
 
 	/// <summary>
 	/// Summary for MainForm
@@ -60,10 +63,10 @@ namespace biai {
 	private: System::Windows::Forms::Button^  button1;
 	private: System::Windows::Forms::Label^  label2;
 	private: System::Windows::Forms::TextBox^  textBox3;
-	private: System::Windows::Forms::TextBox^  textBox5;
-	private: System::Windows::Forms::TextBox^  textBox4;
-	private: System::Windows::Forms::Label^  label4;
-	private: System::Windows::Forms::Label^  label3;
+
+
+
+
 
 	private:
 		/// <summary>
@@ -92,10 +95,6 @@ namespace biai {
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
-			this->label3 = (gcnew System::Windows::Forms::Label());
-			this->label4 = (gcnew System::Windows::Forms::Label());
-			this->textBox4 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox5 = (gcnew System::Windows::Forms::TextBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart1))->BeginInit();
 			this->grpBoxOutput->SuspendLayout();
 			this->grpBoxChart->SuspendLayout();
@@ -179,10 +178,6 @@ namespace biai {
 			// 
 			// groupBox1
 			// 
-			this->groupBox1->Controls->Add(this->textBox5);
-			this->groupBox1->Controls->Add(this->textBox4);
-			this->groupBox1->Controls->Add(this->label4);
-			this->groupBox1->Controls->Add(this->label3);
 			this->groupBox1->Controls->Add(this->button1);
 			this->groupBox1->Controls->Add(this->label2);
 			this->groupBox1->Controls->Add(this->textBox3);
@@ -218,7 +213,7 @@ namespace biai {
 			// 
 			this->textBox3->Location = System::Drawing::Point(30, 49);
 			this->textBox3->Name = L"textBox3";
-			this->textBox3->Size = System::Drawing::Size(55, 20);
+			this->textBox3->Size = System::Drawing::Size(148, 20);
 			this->textBox3->TabIndex = 2;
 			// 
 			// label1
@@ -234,7 +229,7 @@ namespace biai {
 			// 
 			this->textBox2->Location = System::Drawing::Point(30, 23);
 			this->textBox2->Name = L"textBox2";
-			this->textBox2->Size = System::Drawing::Size(55, 20);
+			this->textBox2->Size = System::Drawing::Size(148, 20);
 			this->textBox2->TabIndex = 0;
 			// 
 			// panel1
@@ -246,38 +241,6 @@ namespace biai {
 			this->panel1->Name = L"panel1";
 			this->panel1->Size = System::Drawing::Size(959, 604);
 			this->panel1->TabIndex = 8;
-			// 
-			// label3
-			// 
-			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(91, 26);
-			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(26, 13);
-			this->label3->TabIndex = 5;
-			this->label3->Text = L"* t +";
-			// 
-			// label4
-			// 
-			this->label4->AutoSize = true;
-			this->label4->Location = System::Drawing::Point(91, 52);
-			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(26, 13);
-			this->label4->TabIndex = 6;
-			this->label4->Text = L"* t +";
-			// 
-			// textBox4
-			// 
-			this->textBox4->Location = System::Drawing::Point(123, 49);
-			this->textBox4->Name = L"textBox4";
-			this->textBox4->Size = System::Drawing::Size(55, 20);
-			this->textBox4->TabIndex = 7;
-			// 
-			// textBox5
-			// 
-			this->textBox5->Location = System::Drawing::Point(123, 23);
-			this->textBox5->Name = L"textBox5";
-			this->textBox5->Size = System::Drawing::Size(55, 20);
-			this->textBox5->TabIndex = 8;
 			// 
 			// MainForm
 			// 
@@ -369,18 +332,6 @@ namespace biai {
 		this->textBox1->Text = MyString;
 	}
 
-	private: int function1(int x) {
-		return 0.7*x;
-	}
-	private: int function2(int x) {
-		return 6 + log(x);
-	}
-
-	private: double squareFunction(double x) {
-		return 2 * x*x + 5 * x;
-	}
-
-
 	private: System::Void initializeChart() {
 		this->chart1->ChartAreas->Add("area");
 		this->chart1->ChartAreas["area"]->AxisX->Minimum = 0;
@@ -403,30 +354,18 @@ namespace biai {
 		this->chart1->Series["error"]->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Line;
 		this->chart1->Series["data"]->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Line;
 
-		for (int i = 0; i < 20; i++) {
-			this->chart1->Series["function1"]->Points->AddXY(i, function1(i));
-			this->chart1->Series["function2"]->Points->AddXY(i, function2(i));
-		}
-
-		/*for (double dbIter = 0.0; dbIter < 20; dbIter += 1.0) {
-			this->chart1->Series["kromka"]->Points->AddXY(dbIter, squareFunction(dbIter));
-		}*/
 	}
 
 	private: System::Void OnClick_btnTest(System::Object^  sender, System::EventArgs^  e) {}
-
-
-	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
-
+			 
+	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {		
 		this->chart1->Series["function1"]->Points->Clear();
 		for (int k = 0; k < 2000; k++) {
-		double x = double::Parse(this->textBox2->Text);
-		double y = double::Parse(this->textBox3->Text);
-		double x_start = double::Parse(this->textBox5->Text);
-		double y_start = double::Parse(this->textBox4->Text);
-		this->chart1->Series["function1"]->Points->AddXY(x*k + x_start, y*k + y_start);
+			double x = solve(msclr::interop::marshal_as<std::string>(this->textBox2->Text), k);
+			double y = solve(msclr::interop::marshal_as<std::string>(this->textBox3->Text), k);
+			this->chart1->Series["function1"]->Points->AddXY(x, y);
 		}
-
 	}
+
 	};
 }
