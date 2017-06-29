@@ -8,11 +8,14 @@ using namespace std;
 
 class TrainingData
 {
-	ifstream prv_trainingDataFile;
+	fstream  prv_trainingDataFile;
 public:
 	TrainingData(const string filename);
+	~TrainingData();
 	bool isEof(void) { return prv_trainingDataFile.eof(); }
 	void getTopology(vector<unsigned> &topology);
+	void setTopology(string topology);
 	unsigned getNextInputs(vector<double> &inputValues);
 	unsigned getTargetOutputs(vector<double> &targetOutputValues);
+	void generate();
 };

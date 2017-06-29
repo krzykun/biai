@@ -78,6 +78,10 @@ namespace biai {
 	private: System::Windows::Forms::TextBox^  textBox8;
 	private: System::Windows::Forms::Label^  label8;
 	private: System::Windows::Forms::TextBox^  textBox9;
+	private: System::Windows::Forms::Button^  button3;
+	private: System::Windows::Forms::GroupBox^  groupBox3;
+	private: System::Windows::Forms::Label^  label9;
+	private: System::Windows::Forms::TextBox^  textBox10;
 
 
 
@@ -103,7 +107,17 @@ namespace biai {
 			this->grpBoxChart = (gcnew System::Windows::Forms::GroupBox());
 			this->btnLaunchTest = (gcnew System::Windows::Forms::Button());
 			this->grpBoxInputs = (gcnew System::Windows::Forms::GroupBox());
+			this->groupBox3 = (gcnew System::Windows::Forms::GroupBox());
+			this->label9 = (gcnew System::Windows::Forms::Label());
+			this->textBox10 = (gcnew System::Windows::Forms::TextBox());
+			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->groupBox2 = (gcnew System::Windows::Forms::GroupBox());
+			this->label6 = (gcnew System::Windows::Forms::Label());
+			this->textBox7 = (gcnew System::Windows::Forms::TextBox());
+			this->label7 = (gcnew System::Windows::Forms::Label());
+			this->textBox8 = (gcnew System::Windows::Forms::TextBox());
+			this->label8 = (gcnew System::Windows::Forms::Label());
+			this->textBox9 = (gcnew System::Windows::Forms::TextBox());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->label5 = (gcnew System::Windows::Forms::Label());
 			this->textBox6 = (gcnew System::Windows::Forms::TextBox());
@@ -119,16 +133,11 @@ namespace biai {
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
-			this->label6 = (gcnew System::Windows::Forms::Label());
-			this->textBox7 = (gcnew System::Windows::Forms::TextBox());
-			this->label7 = (gcnew System::Windows::Forms::Label());
-			this->textBox8 = (gcnew System::Windows::Forms::TextBox());
-			this->label8 = (gcnew System::Windows::Forms::Label());
-			this->textBox9 = (gcnew System::Windows::Forms::TextBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart1))->BeginInit();
 			this->grpBoxOutput->SuspendLayout();
 			this->grpBoxChart->SuspendLayout();
 			this->grpBoxInputs->SuspendLayout();
+			this->groupBox3->SuspendLayout();
 			this->groupBox2->SuspendLayout();
 			this->groupBox1->SuspendLayout();
 			this->panel1->SuspendLayout();
@@ -136,7 +145,7 @@ namespace biai {
 			// 
 			// Start
 			// 
-			this->Start->Location = System::Drawing::Point(6, 19);
+			this->Start->Location = System::Drawing::Point(12, 25);
 			this->Start->Name = L"Start";
 			this->Start->Size = System::Drawing::Size(123, 33);
 			this->Start->TabIndex = 1;
@@ -186,16 +195,17 @@ namespace biai {
 			// 
 			// btnLaunchTest
 			// 
-			this->btnLaunchTest->Location = System::Drawing::Point(6, 58);
+			this->btnLaunchTest->Location = System::Drawing::Point(12, 64);
 			this->btnLaunchTest->Name = L"btnLaunchTest";
 			this->btnLaunchTest->Size = System::Drawing::Size(123, 34);
 			this->btnLaunchTest->TabIndex = 6;
-			this->btnLaunchTest->Text = L"Launch tests";
+			this->btnLaunchTest->Text = L"Approximate";
 			this->btnLaunchTest->UseVisualStyleBackColor = true;
 			this->btnLaunchTest->Click += gcnew System::EventHandler(this, &MainForm::OnClick_btnTest);
 			// 
 			// grpBoxInputs
 			// 
+			this->grpBoxInputs->Controls->Add(this->groupBox3);
 			this->grpBoxInputs->Controls->Add(this->groupBox2);
 			this->grpBoxInputs->Controls->Add(this->groupBox1);
 			this->grpBoxInputs->Controls->Add(this->btnLaunchTest);
@@ -207,6 +217,44 @@ namespace biai {
 			this->grpBoxInputs->TabIndex = 7;
 			this->grpBoxInputs->TabStop = false;
 			this->grpBoxInputs->Text = L"Inputs";
+			// 
+			// groupBox3
+			// 
+			this->groupBox3->Controls->Add(this->label9);
+			this->groupBox3->Controls->Add(this->textBox10);
+			this->groupBox3->Controls->Add(this->button3);
+			this->groupBox3->Location = System::Drawing::Point(341, 18);
+			this->groupBox3->Name = L"groupBox3";
+			this->groupBox3->Size = System::Drawing::Size(136, 125);
+			this->groupBox3->TabIndex = 10;
+			this->groupBox3->TabStop = false;
+			this->groupBox3->Text = L"Test data";
+			// 
+			// label9
+			// 
+			this->label9->AutoSize = true;
+			this->label9->Location = System::Drawing::Point(6, 23);
+			this->label9->Name = L"label9";
+			this->label9->Size = System::Drawing::Size(54, 13);
+			this->label9->TabIndex = 16;
+			this->label9->Text = L"Topology:";
+			// 
+			// textBox10
+			// 
+			this->textBox10->Location = System::Drawing::Point(6, 39);
+			this->textBox10->Name = L"textBox10";
+			this->textBox10->Size = System::Drawing::Size(124, 20);
+			this->textBox10->TabIndex = 6;
+			// 
+			// button3
+			// 
+			this->button3->Location = System::Drawing::Point(6, 95);
+			this->button3->Name = L"button3";
+			this->button3->Size = System::Drawing::Size(123, 24);
+			this->button3->TabIndex = 9;
+			this->button3->Text = L"Create";
+			this->button3->UseVisualStyleBackColor = true;
+			this->button3->Click += gcnew System::EventHandler(this, &MainForm::button3_Click);
 			// 
 			// groupBox2
 			// 
@@ -223,12 +271,60 @@ namespace biai {
 			this->groupBox2->Controls->Add(this->textBox4);
 			this->groupBox2->Controls->Add(this->label4);
 			this->groupBox2->Controls->Add(this->textBox5);
-			this->groupBox2->Location = System::Drawing::Point(362, 12);
+			this->groupBox2->Location = System::Drawing::Point(483, 18);
 			this->groupBox2->Name = L"groupBox2";
 			this->groupBox2->Size = System::Drawing::Size(258, 125);
 			this->groupBox2->TabIndex = 8;
 			this->groupBox2->TabStop = false;
 			this->groupBox2->Text = L"scale";
+			// 
+			// label6
+			// 
+			this->label6->AutoSize = true;
+			this->label6->Location = System::Drawing::Point(136, 73);
+			this->label6->Name = L"label6";
+			this->label6->Size = System::Drawing::Size(56, 13);
+			this->label6->TabIndex = 15;
+			this->label6->Text = L"yInterval =";
+			// 
+			// textBox7
+			// 
+			this->textBox7->Location = System::Drawing::Point(197, 70);
+			this->textBox7->Name = L"textBox7";
+			this->textBox7->Size = System::Drawing::Size(54, 20);
+			this->textBox7->TabIndex = 14;
+			// 
+			// label7
+			// 
+			this->label7->AutoSize = true;
+			this->label7->Location = System::Drawing::Point(136, 46);
+			this->label7->Name = L"label7";
+			this->label7->Size = System::Drawing::Size(41, 13);
+			this->label7->TabIndex = 13;
+			this->label7->Text = L"yMax =";
+			// 
+			// textBox8
+			// 
+			this->textBox8->Location = System::Drawing::Point(197, 43);
+			this->textBox8->Name = L"textBox8";
+			this->textBox8->Size = System::Drawing::Size(54, 20);
+			this->textBox8->TabIndex = 12;
+			// 
+			// label8
+			// 
+			this->label8->AutoSize = true;
+			this->label8->Location = System::Drawing::Point(135, 18);
+			this->label8->Name = L"label8";
+			this->label8->Size = System::Drawing::Size(38, 13);
+			this->label8->TabIndex = 11;
+			this->label8->Text = L"yMin =";
+			// 
+			// textBox9
+			// 
+			this->textBox9->Location = System::Drawing::Point(197, 17);
+			this->textBox9->Name = L"textBox9";
+			this->textBox9->Size = System::Drawing::Size(54, 20);
+			this->textBox9->TabIndex = 10;
 			// 
 			// button2
 			// 
@@ -296,7 +392,7 @@ namespace biai {
 			this->groupBox1->Controls->Add(this->textBox3);
 			this->groupBox1->Controls->Add(this->label1);
 			this->groupBox1->Controls->Add(this->textBox2);
-			this->groupBox1->Location = System::Drawing::Point(154, 12);
+			this->groupBox1->Location = System::Drawing::Point(141, 18);
 			this->groupBox1->Name = L"groupBox1";
 			this->groupBox1->Size = System::Drawing::Size(194, 125);
 			this->groupBox1->TabIndex = 7;
@@ -365,54 +461,6 @@ namespace biai {
 			this->panel1->Size = System::Drawing::Size(959, 604);
 			this->panel1->TabIndex = 8;
 			// 
-			// label6
-			// 
-			this->label6->AutoSize = true;
-			this->label6->Location = System::Drawing::Point(136, 73);
-			this->label6->Name = L"label6";
-			this->label6->Size = System::Drawing::Size(56, 13);
-			this->label6->TabIndex = 15;
-			this->label6->Text = L"yInterval =";
-			// 
-			// textBox7
-			// 
-			this->textBox7->Location = System::Drawing::Point(197, 70);
-			this->textBox7->Name = L"textBox7";
-			this->textBox7->Size = System::Drawing::Size(54, 20);
-			this->textBox7->TabIndex = 14;
-			// 
-			// label7
-			// 
-			this->label7->AutoSize = true;
-			this->label7->Location = System::Drawing::Point(136, 46);
-			this->label7->Name = L"label7";
-			this->label7->Size = System::Drawing::Size(41, 13);
-			this->label7->TabIndex = 13;
-			this->label7->Text = L"yMax =";
-			// 
-			// textBox8
-			// 
-			this->textBox8->Location = System::Drawing::Point(197, 43);
-			this->textBox8->Name = L"textBox8";
-			this->textBox8->Size = System::Drawing::Size(54, 20);
-			this->textBox8->TabIndex = 12;
-			// 
-			// label8
-			// 
-			this->label8->AutoSize = true;
-			this->label8->Location = System::Drawing::Point(135, 18);
-			this->label8->Name = L"label8";
-			this->label8->Size = System::Drawing::Size(38, 13);
-			this->label8->TabIndex = 11;
-			this->label8->Text = L"yMin =";
-			// 
-			// textBox9
-			// 
-			this->textBox9->Location = System::Drawing::Point(197, 17);
-			this->textBox9->Name = L"textBox9";
-			this->textBox9->Size = System::Drawing::Size(54, 20);
-			this->textBox9->TabIndex = 10;
-			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -427,6 +475,8 @@ namespace biai {
 			this->grpBoxOutput->PerformLayout();
 			this->grpBoxChart->ResumeLayout(false);
 			this->grpBoxInputs->ResumeLayout(false);
+			this->groupBox3->ResumeLayout(false);
+			this->groupBox3->PerformLayout();
 			this->groupBox2->ResumeLayout(false);
 			this->groupBox2->PerformLayout();
 			this->groupBox1->ResumeLayout(false);
@@ -575,5 +625,11 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 	this->chart1->ChartAreas["area"]->AxisY->Maximum = double::Parse(this->textBox8->Text);
 	this->chart1->ChartAreas["area"]->AxisY->Interval = double::Parse(this->textBox7->Text);
 }
+private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e) {
+	TrainingData trainingData("trainingData.txt");
+	trainingData.setTopology(msclr::interop::marshal_as<std::string>(this->textBox10->Text));
+	trainingData.generate();
+}
+
 };
 }
