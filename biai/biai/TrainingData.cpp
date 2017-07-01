@@ -1,8 +1,13 @@
 #include "TrainingData.h"
 
-TrainingData::TrainingData(const string filename)
+TrainingData::TrainingData(const string filename, OpenType opentype)
 {
-	prv_trainingDataFile.open(filename, fstream::in | fstream::out | fstream::trunc);
+	if(opentype == READ)
+		prv_trainingDataFile.open(filename, fstream::in);
+	else if (opentype == WRITE)
+		prv_trainingDataFile.open(filename, fstream::out);
+	else
+		abort();
 }
 TrainingData::~TrainingData()
 {

@@ -502,7 +502,7 @@ namespace biai {
 
 	private: System::Void Start_Click(System::Object^  sender, System::EventArgs^  e) {
 		string text = "";
-		TrainingData trainData("trainingData.txt");
+		TrainingData trainData("trainingData.txt", READ);
 
 		vector<unsigned> topology;
 		trainData.getTopology(topology);
@@ -626,7 +626,7 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 	this->chart1->ChartAreas["area"]->AxisY->Interval = double::Parse(this->textBox7->Text);
 }
 private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e) {
-	TrainingData trainingData("trainingData.txt");
+	TrainingData trainingData("trainingData.txt", WRITE);
 	trainingData.setTopology(msclr::interop::marshal_as<std::string>(this->textBox10->Text));
 	trainingData.generate();
 }
