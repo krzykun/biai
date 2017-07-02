@@ -91,3 +91,12 @@ void Neuron::updateInputWeights(Layer &prevLayer)
 
 double Neuron::alpha = 0.5;
 double Neuron::eta = 0.15;
+
+string Neuron::toString() {
+	stringstream ss;
+	ss << prv_myIndex << " " << prv_outputValue << " " << prv_gradient;
+	for (int i = 0; i < prv_outputWeights.size(); i++)
+		ss << " " << prv_outputWeights[i].weight << " " << prv_outputWeights[i].deltaWeight;
+	ss << endl;
+	return ss.str();
+}

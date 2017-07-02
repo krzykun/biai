@@ -55,7 +55,6 @@ namespace biai {
 	private: System::Windows::Forms::Button^  btnLaunchTest;
 	private: System::Windows::Forms::GroupBox^  grpBoxInputs;
 	private: System::Windows::Forms::Panel^  panel1;
-	private: Net* NeuralNetwork;
 	private: System::Windows::Forms::GroupBox^  groupBox1;
 	private: System::Windows::Forms::TextBox^  textBox2;
 	private: System::Windows::Forms::Label^  label1;
@@ -649,56 +648,57 @@ namespace biai {
 #pragma endregion
 
 	private: System::Void Start_Click(System::Object^  sender, System::EventArgs^  e) {
-		string text = "";
 		TrainingData trainData("trainingData.txt", READ);
-
+		stringstream ss;
 		vector<unsigned> topology;
 		trainData.getTopology(topology);
-
+		double maxError;
 		Net myNet(topology);
+		this->chart1->Series["error"]->Points->Clear();
 
 		vector<double> inputVals, targetVals, resultVals;
 		int trainingPass = 0;
-		while (!trainData.isEof()) {
-			string text2 = "";
+		while (!trainData.isEof()) {			
 			++trainingPass;
-			text2 += "\t\t";
-			text2 += "Pass";
-			text2 += to_string(trainingPass);
-			text2 += "\t\t";
+			ss << "Pass" << trainingPass << "\t\t";
 
 			// Get new input data and feed it forward:
-			if (trainData.getNextInputs(inputVals) != topology[0]) {
+			if (trainData.getNextInputs(inputVals) != topology[0]) 
 				break;
-			}
 
-			text2 += showVectorVals("Inputs:", inputVals);
+			ss << showVectorVals("Inputs:", inputVals) << "\t\t";
 			myNet.feedForward(inputVals);
-			text2 += "\t\t";
 
 			// Collect the net's actual output results:
 			myNet.getResults(resultVals);
-			text2 += showVectorVals("Outputs:", resultVals);
-			text2 += "\t\t";
+			ss << showVectorVals("Outputs:", resultVals) << "\t\t";
 
 			// Train the net what the outputs should have been:
 			trainData.getTargetOutputs(targetVals);
-			text2 += showVectorVals("Targets:", targetVals);
-			//assert(targetVals.size() == topology.back());
-			text2 += "\t\t";
+			ss << showVectorVals("Targets:", targetVals) << "\t\t";
+			assert(targetVals.size() == topology.back());
 
 			myNet.backProp(targetVals);
 
-			// Report how well the training is working, average over recent samples:
-			text2 += "Net recent average error: ";
+			// Report how well the training is working, average over recent samples:			
 			double error = myNet.getRecentAverageError();
-			text2 += to_string(error);
-			this->chart1->Series["error"]->Points->AddXY(trainingPass, error);
-			text2 += "\r\n";
-			if (trainingPass % 50 == 0)
-				text += text2;
+			ss << "Net recent average error: " << error << "\r\n";
+			if (this->checkBox2->Checked) {
+				this->chart1->Series["error"]->Points->AddXY(trainingPass, error);
+				if (maxError < error)
+					maxError = error;
+			}
 		}
-		this->textBox1->Text = toSystemString(text);
+		this->textBox1->Text = toSystemString(ss.str());
+		if (this->checkBox3->Checked && this->checkBox2->Checked) {
+			this->chart1->ChartAreas["area"]->AxisX->Minimum = 0;
+			this->chart1->ChartAreas["area"]->AxisX->Maximum = trainingPass;
+			this->chart1->ChartAreas["area"]->AxisX->Interval = trainingPass / 10.0;
+			this->chart1->ChartAreas["area"]->AxisY->Minimum = 0;
+			this->chart1->ChartAreas["area"]->AxisY->Interval = maxError / 10.0;
+			this->chart1->ChartAreas["area"]->AxisY->Maximum = maxError;
+		}
+		myNet.save("net.txt");
 	}
 
 	private: System::Void initializeChart() {
@@ -722,7 +722,40 @@ namespace biai {
 
 	}
 
-	private: System::Void OnClick_btnTest(System::Object^  sender, System::EventArgs^  e) {}
+	private: vector<double> getInputsForPoint(double t) {
+		vector<double> inputs;
+		string xFunction = toStdString(this->textBox2->Text);
+		string yFunction = toStdString(this->textBox3->Text);
+		TopologySchema topologySchema = createTopologySchema(toStdString(this->textBox10->Text));
+		for (int i = topologySchema[0]; i > 0; --i) {
+			double x = solve(xFunction, t - i);
+			double y = solve(yFunction, t - i);
+			inputs.push_back(x);
+			inputs.push_back(y);
+		}
+		return inputs;
+	}
+
+	private: System::Void OnClick_btnTest(System::Object^  sender, System::EventArgs^  e) {
+		int tEnd = int::Parse(this->textBox12->Text);
+		int points = int::Parse(this->textBox14->Text);
+		Net myNet("net.txt");
+		stringstream ss;
+		this->chart1->Series["approximate"]->Points->Clear();
+
+		vector<double> inputVals, resultVals;
+		int pass = 0;
+		for (int i = tEnd; i < (tEnd + points); i++) {
+			++pass;
+			ss << "Pass" << pass << "\t\t";
+			inputVals = getInputsForPoint(i);
+			ss << showVectorVals("Inputs:", inputVals) << "\t\t";
+			myNet.feedForward(inputVals);
+			myNet.getResults(resultVals);
+			ss << showVectorVals("Outputs:", resultVals) << "\t\t";
+		}
+			
+	}
 			 
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {	
 		double xMin = solve(toStdString(this->textBox2->Text), 0);
@@ -732,11 +765,11 @@ namespace biai {
 		int tStart = int::Parse(this->textBox13->Text);
 		int tEnd = int::Parse(this->textBox12->Text);
 
-		this->chart1->Series["function1"]->Points->Clear();
+		this->chart1->Series["function"]->Points->Clear();
 		for (int k = tStart; k < tEnd; k++) {
 			double x = solve(toStdString(this->textBox2->Text), k);
 			double y = solve(toStdString(this->textBox3->Text), k);
-			this->chart1->Series["function1"]->Points->AddXY(x, y);
+			this->chart1->Series["function"]->Points->AddXY(x, y);
 			if (x > xMax)
 				xMax = x;
 			else if (x < xMin)

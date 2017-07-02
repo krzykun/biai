@@ -5,6 +5,11 @@ Net::Net(const TopologySchema &topologySchema)
 	topology = createTopology(topologySchema);
 }
 
+Net::Net(string filename)
+{
+	// TODO: implement this constructor
+}
+
 Net::~Net()
 {
 }
@@ -12,19 +17,13 @@ Net::~Net()
 void Net::feedForward(const vector<double> &inputValues)
 {
 	assert(inputValues.size() == topology[0].size() - 1);
-
 	for (unsigned whichInput = 0; whichInput < inputValues.size(); ++whichInput)
-	{
 		topology[0][whichInput].setOutputValue(inputValues[whichInput]);
-	}
-
 	for (unsigned whichLayer = 1; whichLayer < topology.size(); ++whichLayer)
 	{
 		Layer &previousLayer = topology[whichLayer - 1];
 		for (unsigned whichNeuron = 0; whichNeuron < topology[whichLayer].size() - 1; ++whichNeuron)
-		{
 			topology[whichLayer][whichNeuron].feedForward(previousLayer);
-		}
 	}
 }
 
@@ -49,9 +48,7 @@ void Net::backProp(const vector<double> &targetValues)
 	//calculate output layer gradients
 
 	for (unsigned whichNeuron = 0; whichNeuron < outputLayer.size() - 1; ++whichNeuron)
-	{
 		outputLayer[whichNeuron].calcOutputGradients(targetValues[whichNeuron]);
-	}
 	
 	//Calculate gradients on hidden layers
 
@@ -59,11 +56,8 @@ void Net::backProp(const vector<double> &targetValues)
 	{
 		Layer &hiddenLayer = topology[whichLayer];
 		Layer &nextLayer = topology[whichLayer + 1];	//convenience vars for debug later
-
 		for (unsigned whichNeuron = 0; whichNeuron < hiddenLayer.size(); ++whichNeuron)
-		{
 			hiddenLayer[whichNeuron].calcHiddenGradients(nextLayer);
-		}
 	}
 
 	//For all layers from outputs to first hidden layer
@@ -73,20 +67,27 @@ void Net::backProp(const vector<double> &targetValues)
 	{
 		Layer &layer = topology[whichLayer];
 		Layer &prevLayer = topology[whichLayer - 1];
-
 		for (unsigned whichNeuron = 0; whichNeuron < layer.size() - 1; ++whichNeuron)
-		{
 			layer[whichNeuron].updateInputWeights(prevLayer);
-		}
 	}
 }
 
 void Net::getResults(vector<double> &resultValues) const
 {
 	resultValues.clear();
-
 	for (unsigned whichNeuron = 0; whichNeuron < topology.back().size() - 1; ++whichNeuron)
-	{
 		resultValues.push_back(topology.back()[whichNeuron].getOutputValue());
-	}
+}
+
+void Net::save(string filename) {
+	fstream file;
+	file.open(filename, fstream::out);
+	file << "topology:";
+	for (int i = 0; i < topology.size(); ++i) // print sizes of layers
+		file << " " << (topology[i].size()-1);
+	file << endl;
+	for (int i = 0; i < topology.size(); ++i)
+		for (int j = 0; j < topology[i].size(); ++j)
+			file << topology[i][j].toString(); // print every neuron
+	file.close();
 }

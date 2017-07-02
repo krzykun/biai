@@ -2,13 +2,11 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
-
+#include <string>
+#include <sstream>
 #include "Connection.h"
 
-
-using std::vector;
-using std::cout;
-using std::endl;
+using namespace std;
 
 extern const bool isDebug;
 
@@ -37,5 +35,6 @@ public:
 	//all neurons use the same value:
 	static double alpha;	//0.0 - n multiplier of the last weight change (momentum)
 	static double eta; //0.0 - 1.0 training rate
-	static double randomWeight(void) { return rand() / double(RAND_MAX); }
+	static double randomWeight(void) { return rand() / double(RAND_MAX);}
+	string toString();
 };
