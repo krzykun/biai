@@ -60,6 +60,9 @@
     <ClCompile Include="StringHelper.cpp">
       <Filter>Source Files\common</Filter>
     </ClCompile>
+    <ClCompile Include="Normalizer.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Connection.h">
@@ -99,6 +102,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="StringHelper.h">
+      <Filter>Header Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Normalizer.h">
       <Filter>Header Files\common</Filter>
     </ClInclude>
   </ItemGroup>

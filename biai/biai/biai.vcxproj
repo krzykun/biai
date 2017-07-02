@@ -151,6 +151,7 @@
     <ClCompile Include="Net.cpp" />
     <ClCompile Include="Neuron.cpp" />
     <ClCompile Include="Expression.cpp" />
+    <ClCompile Include="Normalizer.cpp" />
     <ClCompile Include="StringHelper.cpp" />
     <ClCompile Include="Topology.cpp" />
     <ClCompile Include="TrainingData.cpp" />
@@ -168,6 +169,7 @@
     </ClInclude>
     <ClInclude Include="Net.h" />
     <ClInclude Include="Neuron.h" />
+    <ClInclude Include="Normalizer.h" />
     <ClInclude Include="StringHelper.h" />
     <ClInclude Include="Topology.h" />
     <ClInclude Include="TrainingData.h" />

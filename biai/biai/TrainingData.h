@@ -1,5 +1,7 @@
 #pragma once
 #include "Topology.h"
+#include "Expression.h"
+#include "Normalizer.h"
 #include <string>
 #include <vector>
 #include <fstream>
@@ -19,5 +21,5 @@ public:
 	void setTopology(TopologySchema topologySchema);
 	unsigned getNextInputs(vector<double> &inputValues);
 	unsigned getTargetOutputs(vector<double> &targetOutputValues);
-	void generate(TopologySchema topologySchema);
+	void generate(TopologySchema topologySchema, int size, int tStart, int tEnd, string xFunction, string yFunction);
 };

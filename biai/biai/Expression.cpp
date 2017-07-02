@@ -1,22 +1,13 @@
 #include "Expression.h"
 
-void replaceStrings(std::string& str, const std::string& toReplace, const std::string& replacer) {
-	std::string::size_type n = 0;
-	while ((n = str.find(toReplace, n)) != std::string::npos)
-	{
-		str.replace(n, toReplace.size(), replacer);
-		n += replacer.size();
-	}
-}
-
-string replaceParameterT(string expression, double parameter) {
+string replaceParameterT(Function expression, double parameter) {
 	stringstream ss;
 	ss << parameter;
 	replaceStrings(expression, "t", ss.str());
 	return expression;
 }
 
-double solve(string expression, double parameterT) {
+double solve(Function expression, double parameterT) {
 	expression = replaceParameterT(expression, parameterT);
 	ostringstream ss;
 	Parser prs;
@@ -26,3 +17,18 @@ double solve(string expression, double parameterT) {
 	return atof(str.c_str());
 }
 
+double maxValue(Function function, int tStart, int tEnd) {
+	double maxValue = solve(function, tStart);
+	for (int i = tStart + 1; i < tEnd; i++)
+		if (maxValue < solve(function, i))
+			maxValue = solve(function, i);
+	return maxValue;
+}
+
+double minValue(Function function, int tStart, int tEnd) {
+	double minValue = solve(function, tStart);
+	for (int i = tStart + 1; i < tEnd; i++)
+		if (minValue > solve(function, i))
+			minValue = solve(function, i);
+	return minValue;
+}

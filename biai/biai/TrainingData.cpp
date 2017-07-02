@@ -70,16 +70,24 @@ unsigned TrainingData::getTargetOutputs(vector<double> &targetOutputValues)
 	return targetOutputValues.size();
 }
 
-void TrainingData::generate(TopologySchema topologySchema)
-{	// TODO: Create data depending on topologySchema
+void TrainingData::generate(TopologySchema topologySchema, int size, int tStart, int tEnd, string xFunction, string yFunction)
+{
+	Normalizer xNormalizer(minValue(xFunction, tStart, tEnd), maxValue(xFunction, tStart, tEnd));
+	Normalizer yNormalizer(minValue(yFunction, tStart, tEnd), maxValue(yFunction, tStart, tEnd));
 	setTopology(topologySchema);
-	double a = rand() / double(RAND_MAX);
-	double b = rand() / double(RAND_MAX);
-	for (int i = 2000; i >= 0; --i) {
-		double t = rand() / double(RAND_MAX);
+	for (int i = 0; i < size; ++i) {
+		double t = tStart + ((rand() / double(RAND_MAX)) * (tEnd - tStart));
 		double delta_t = rand() / double(RAND_MAX) / 10;
-		prv_trainingDataFile << "in:" << " " << a*t << " " << b*t << " " << a*(t + delta_t) << " " << b*(t + delta_t) << " " << a*(t + 2 * delta_t) << " " << b*(t + 2 * delta_t);
-		prv_trainingDataFile << " " << a*(t + 3 * delta_t) << " " << b*(t + 3 * delta_t) << " " << a*(t + 4 * delta_t) << " " << b*(t + 4 * delta_t);
-		prv_trainingDataFile << endl << "out: " << a*(t + 5 * delta_t) << " " << b*(t + 5 * delta_t) << "" << endl;
+		prv_trainingDataFile << "in:";
+		for (int j = 0; j < (topologySchema.front() / 2); ++j) {
+			prv_trainingDataFile << " " << xNormalizer.normalize(solve(xFunction, (t + j * delta_t)));
+			prv_trainingDataFile << " " << yNormalizer.normalize(solve(yFunction, (t + j * delta_t)));
+		}
+		prv_trainingDataFile << endl << "out:";
+		for (int j = 0; j < (topologySchema.back() / 2); ++j) {
+			prv_trainingDataFile << " " << xNormalizer.normalize(solve(xFunction, (t + ((topologySchema.front() / 2) + j) * delta_t)));
+			prv_trainingDataFile << " " << yNormalizer.normalize(solve(yFunction, (t + ((topologySchema.front() / 2) + j) * delta_t)));
+		}
+		prv_trainingDataFile << endl;
 	};
 }
