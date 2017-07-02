@@ -13,3 +13,15 @@ Topology createTopology(TopologySchema topologySchema) {
 	}
 	return topology;
 }
+
+TopologySchema createTopologySchema(string topologySchemaString) {
+	string s = topologySchemaString;
+	vector<std::string> layers;
+	splitString(topologySchemaString, layers);	
+	TopologySchema topologySchema;
+	for (int i = 0; i < layers.size(); ++i){
+		int a = atoi(layers.at(i).c_str());
+		topologySchema.push_back(a);
+	}
+	return topologySchema;
+}

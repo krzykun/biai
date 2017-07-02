@@ -9,6 +9,7 @@ TrainingData::TrainingData(const string filename, OpenType opentype)
 	else
 		abort();
 }
+
 TrainingData::~TrainingData()
 {
 	prv_trainingDataFile.close();
@@ -30,9 +31,12 @@ void TrainingData::getTopology(vector<unsigned> &topology)
 	return;
 }
 
-void TrainingData::setTopology(string topology)
+void TrainingData::setTopology(TopologySchema topologySchema)
 {
-	prv_trainingDataFile << "topology: " << topology << endl;
+	prv_trainingDataFile << "topology:";
+	for (int i = 0; i < topologySchema.size(); ++i)
+		prv_trainingDataFile << " " << topologySchema.at(i);
+	prv_trainingDataFile << endl;
 }
 
 unsigned TrainingData::getNextInputs(vector<double> &inputValues)
@@ -44,9 +48,8 @@ unsigned TrainingData::getNextInputs(vector<double> &inputValues)
 	ss >> label;
 	if (label.compare("in:") == 0) {
 		double oneValue;
-		while (ss >> oneValue) {
+		while (ss >> oneValue)
 			inputValues.push_back(oneValue);
-		}
 	}
 	return inputValues.size();
 }
@@ -67,8 +70,9 @@ unsigned TrainingData::getTargetOutputs(vector<double> &targetOutputValues)
 	return targetOutputValues.size();
 }
 
-void TrainingData::generate()
-{
+void TrainingData::generate(TopologySchema topologySchema)
+{	// TODO: Create data depending on topologySchema
+	setTopology(topologySchema);
 	double a = rand() / double(RAND_MAX);
 	double b = rand() / double(RAND_MAX);
 	for (int i = 2000; i >= 0; --i) {

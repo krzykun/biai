@@ -13,11 +13,17 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\expression_parser">
-      <UniqueIdentifier>{349671f9-195a-4f4f-8e77-07dcc301008e}</UniqueIdentifier>
+    <Filter Include="Header Files\common">
+      <UniqueIdentifier>{a562e941-1276-4c63-867d-68d211cd29ea}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\expression_parser">
+    <Filter Include="Header Files\common\expression_parser">
       <UniqueIdentifier>{15c2d874-17aa-4c70-9c10-5ab3028521ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\common">
+      <UniqueIdentifier>{92823e18-f71d-458c-9bc0-fae89281e826}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\common\expression_parser">
+      <UniqueIdentifier>{349671f9-195a-4f4f-8e77-07dcc301008e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -34,22 +40,25 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="expression_parser_cpp\error.cpp">
-      <Filter>Source Files\expression_parser</Filter>
+      <Filter>Source Files\common\expression_parser</Filter>
     </ClCompile>
     <ClCompile Include="expression_parser_cpp\functions.cpp">
-      <Filter>Source Files\expression_parser</Filter>
+      <Filter>Source Files\common\expression_parser</Filter>
     </ClCompile>
     <ClCompile Include="expression_parser_cpp\parser.cpp">
-      <Filter>Source Files\expression_parser</Filter>
+      <Filter>Source Files\common\expression_parser</Filter>
     </ClCompile>
     <ClCompile Include="expression_parser_cpp\variablelist.cpp">
-      <Filter>Source Files\expression_parser</Filter>
+      <Filter>Source Files\common\expression_parser</Filter>
     </ClCompile>
     <ClCompile Include="Expression.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Topology.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StringHelper.cpp">
+      <Filter>Source Files\common</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -69,25 +78,28 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="expression_parser_cpp\constants.h">
-      <Filter>Header Files\expression_parser</Filter>
+      <Filter>Header Files\common\expression_parser</Filter>
     </ClInclude>
     <ClInclude Include="expression_parser_cpp\error.h">
-      <Filter>Header Files\expression_parser</Filter>
+      <Filter>Header Files\common\expression_parser</Filter>
     </ClInclude>
     <ClInclude Include="expression_parser_cpp\functions.h">
-      <Filter>Header Files\expression_parser</Filter>
+      <Filter>Header Files\common\expression_parser</Filter>
     </ClInclude>
     <ClInclude Include="expression_parser_cpp\parser.h">
-      <Filter>Header Files\expression_parser</Filter>
+      <Filter>Header Files\common\expression_parser</Filter>
     </ClInclude>
     <ClInclude Include="expression_parser_cpp\variablelist.h">
-      <Filter>Header Files\expression_parser</Filter>
+      <Filter>Header Files\common\expression_parser</Filter>
     </ClInclude>
     <ClInclude Include="Expression.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Topology.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StringHelper.h">
+      <Filter>Header Files\common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
