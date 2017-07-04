@@ -186,7 +186,9 @@ namespace biai {
 			this->textBox1->Location = System::Drawing::Point(3, 16);
 			this->textBox1->Multiline = true;
 			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(953, 215);
+			this->textBox1->ReadOnly = true;
+			this->textBox1->ScrollBars = System::Windows::Forms::ScrollBars::Vertical;
+			this->textBox1->Size = System::Drawing::Size(1285, 215);
 			this->textBox1->TabIndex = 2;
 			// 
 			// chart1
@@ -194,7 +196,7 @@ namespace biai {
 			this->chart1->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->chart1->Location = System::Drawing::Point(3, 16);
 			this->chart1->Name = L"chart1";
-			this->chart1->Size = System::Drawing::Size(953, 326);
+			this->chart1->Size = System::Drawing::Size(1285, 326);
 			this->chart1->TabIndex = 3;
 			this->chart1->Text = L"chart1";
 			// 
@@ -204,7 +206,7 @@ namespace biai {
 			this->grpBoxOutput->Dock = System::Windows::Forms::DockStyle::Top;
 			this->grpBoxOutput->Location = System::Drawing::Point(0, 0);
 			this->grpBoxOutput->Name = L"grpBoxOutput";
-			this->grpBoxOutput->Size = System::Drawing::Size(959, 234);
+			this->grpBoxOutput->Size = System::Drawing::Size(1291, 234);
 			this->grpBoxOutput->TabIndex = 4;
 			this->grpBoxOutput->TabStop = false;
 			this->grpBoxOutput->Text = L"Output";
@@ -215,7 +217,7 @@ namespace biai {
 			this->grpBoxChart->Dock = System::Windows::Forms::DockStyle::Bottom;
 			this->grpBoxChart->Location = System::Drawing::Point(0, 259);
 			this->grpBoxChart->Name = L"grpBoxChart";
-			this->grpBoxChart->Size = System::Drawing::Size(959, 345);
+			this->grpBoxChart->Size = System::Drawing::Size(1291, 345);
 			this->grpBoxChart->TabIndex = 5;
 			this->grpBoxChart->TabStop = false;
 			this->grpBoxChart->Text = L"Visualization";
@@ -240,7 +242,7 @@ namespace biai {
 			this->grpBoxInputs->Dock = System::Windows::Forms::DockStyle::Top;
 			this->grpBoxInputs->Location = System::Drawing::Point(0, 0);
 			this->grpBoxInputs->Name = L"grpBoxInputs";
-			this->grpBoxInputs->Size = System::Drawing::Size(959, 143);
+			this->grpBoxInputs->Size = System::Drawing::Size(1291, 143);
 			this->grpBoxInputs->TabIndex = 7;
 			this->grpBoxInputs->TabStop = false;
 			this->grpBoxInputs->Text = L"Inputs";
@@ -255,7 +257,7 @@ namespace biai {
 			this->groupBox5->Size = System::Drawing::Size(153, 125);
 			this->groupBox5->TabIndex = 12;
 			this->groupBox5->TabStop = false;
-			this->groupBox5->Text = L"approximate";
+			this->groupBox5->Text = L"Approximate";
 			// 
 			// label13
 			// 
@@ -284,7 +286,7 @@ namespace biai {
 			this->groupBox4->Size = System::Drawing::Size(152, 125);
 			this->groupBox4->TabIndex = 11;
 			this->groupBox4->TabStop = false;
-			this->groupBox4->Text = L"learning";
+			this->groupBox4->Text = L"Learning";
 			// 
 			// checkBox3
 			// 
@@ -323,7 +325,7 @@ namespace biai {
 			this->groupBox3->Size = System::Drawing::Size(152, 125);
 			this->groupBox3->TabIndex = 10;
 			this->groupBox3->TabStop = false;
-			this->groupBox3->Text = L"test data";
+			this->groupBox3->Text = L"Training data";
 			// 
 			// label10
 			// 
@@ -389,7 +391,7 @@ namespace biai {
 			this->groupBox2->Size = System::Drawing::Size(246, 125);
 			this->groupBox2->TabIndex = 8;
 			this->groupBox2->TabStop = false;
-			this->groupBox2->Text = L"scale";
+			this->groupBox2->Text = L"Scale";
 			// 
 			// label6
 			// 
@@ -514,7 +516,7 @@ namespace biai {
 			this->groupBox1->Size = System::Drawing::Size(214, 125);
 			this->groupBox1->TabIndex = 7;
 			this->groupBox1->TabStop = false;
-			this->groupBox1->Text = L"function";
+			this->groupBox1->Text = L"Function";
 			// 
 			// textBox12
 			// 
@@ -613,14 +615,14 @@ namespace biai {
 			this->panel1->Dock = System::Windows::Forms::DockStyle::Bottom;
 			this->panel1->Location = System::Drawing::Point(0, 149);
 			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(959, 604);
+			this->panel1->Size = System::Drawing::Size(1291, 604);
 			this->panel1->TabIndex = 8;
 			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(959, 753);
+			this->ClientSize = System::Drawing::Size(1291, 753);
 			this->Controls->Add(this->grpBoxInputs);
 			this->Controls->Add(this->panel1);
 			this->Name = L"MainForm";
@@ -755,6 +757,7 @@ namespace biai {
 
 		vector<double> inputVals, resultVals;
 		int pass = 0;
+		//ss << "\r\n \r\n"; //if history present, uncomment this line 
 		for (int i = tEnd; i < (tEnd + points); i++) {
 			++pass;
 			ss << "Pass" << pass << "\t\t";
@@ -762,7 +765,7 @@ namespace biai {
 			ss << showVectorVals("Inputs:", inputVals) << "\t\t";
 			myNet.feedForward(inputVals);
 			myNet.getResults(resultVals);
-			ss << showVectorVals("Outputs:", resultVals) << "\t\t";
+			ss << showVectorVals("Outputs:", resultVals) << "\r\n";
 			double x = xNormalizer.realValue(resultVals[0]);
 			double y = yNormalizer.realValue(resultVals[1]);
 			this->chart1->Series["function"]->Points->AddXY(x, y);
