@@ -650,10 +650,10 @@ namespace biai {
 	private: System::Void Start_Click(System::Object^  sender, System::EventArgs^  e) {
 		TrainingData trainData("trainingData.txt", READ);
 		stringstream ss;
-		vector<unsigned> topology;
-		trainData.getTopology(topology);
+		TopologySchema topologySchema;
+		trainData.getTopology(topologySchema);
 		double maxError;
-		Net myNet(topology);
+		Net myNet(topologySchema);
 		this->chart1->Series["error"]->Points->Clear();
 
 		vector<double> inputVals, targetVals, resultVals;
@@ -663,7 +663,7 @@ namespace biai {
 			ss << "Pass" << trainingPass << "\t\t";
 
 			// Get new input data and feed it forward:
-			if (trainData.getNextInputs(inputVals) != topology[0]) 
+			if (trainData.getNextInputs(inputVals) != topologySchema[0])
 				break;
 
 			ss << showVectorVals("Inputs:", inputVals) << "\t\t";
@@ -676,7 +676,7 @@ namespace biai {
 			// Train the net what the outputs should have been:
 			trainData.getTargetOutputs(targetVals);
 			ss << showVectorVals("Targets:", targetVals) << "\t\t";
-			assert(targetVals.size() == topology.back());
+			assert(targetVals.size() == topologySchema.back());
 
 			myNet.backProp(targetVals);
 
@@ -722,14 +722,14 @@ namespace biai {
 
 	}
 
-	private: vector<double> getInputsForPoint(double t) {
+	private: vector<double> getInputsForPoint(double t, Normalizer xNormalizer, Normalizer yNormalizer) {
 		vector<double> inputs;
 		string xFunction = toStdString(this->textBox2->Text);
 		string yFunction = toStdString(this->textBox3->Text);
 		TopologySchema topologySchema = createTopologySchema(toStdString(this->textBox10->Text));
-		for (int i = topologySchema[0]; i > 0; --i) {
-			double x = solve(xFunction, t - i);
-			double y = solve(yFunction, t - i);
+		for (int i = (topologySchema[0]/2); i > 0; --i) {
+			double x = xNormalizer.normalize(solve(xFunction, t - i));
+			double y = yNormalizer.normalize(solve(yFunction, t - i));
 			inputs.push_back(x);
 			inputs.push_back(y);
 		}
@@ -737,24 +737,51 @@ namespace biai {
 	}
 
 	private: System::Void OnClick_btnTest(System::Object^  sender, System::EventArgs^  e) {
+		int size = int::Parse(this->textBox11->Text);
+		int tStart = int::Parse(this->textBox13->Text);
 		int tEnd = int::Parse(this->textBox12->Text);
+		string xFunction = toStdString(this->textBox2->Text);
+		string yFunction = toStdString(this->textBox3->Text);
 		int points = int::Parse(this->textBox14->Text);
+		Normalizer xNormalizer(minValue(xFunction, tStart, tEnd + points), maxValue(xFunction, tStart, tEnd + points));
+		Normalizer yNormalizer(minValue(yFunction, tStart, tEnd + points), maxValue(yFunction, tStart, tEnd + points));
 		Net myNet("net.txt");
 		stringstream ss;
 		this->chart1->Series["approximate"]->Points->Clear();
+		double xMin = this->chart1->ChartAreas["area"]->AxisX->Minimum;
+		double xMax = this->chart1->ChartAreas["area"]->AxisX->Maximum;
+		double yMin = this->chart1->ChartAreas["area"]->AxisY->Minimum;
+		double yMax = this->chart1->ChartAreas["area"]->AxisY->Maximum;
 
 		vector<double> inputVals, resultVals;
 		int pass = 0;
 		for (int i = tEnd; i < (tEnd + points); i++) {
 			++pass;
 			ss << "Pass" << pass << "\t\t";
-			inputVals = getInputsForPoint(i);
+			inputVals = getInputsForPoint(i, xNormalizer, yNormalizer);
 			ss << showVectorVals("Inputs:", inputVals) << "\t\t";
 			myNet.feedForward(inputVals);
 			myNet.getResults(resultVals);
 			ss << showVectorVals("Outputs:", resultVals) << "\t\t";
+			double x = xNormalizer.realValue(resultVals[0]);
+			double y = yNormalizer.realValue(resultVals[1]);
+			this->chart1->Series["function"]->Points->AddXY(x, y);
+			if (x > xMax)
+				xMax = x;
+			else if (x < xMin)
+				xMin = x;
+			if (y > yMax)
+				yMax = y;
+			else if (y < yMin)
+				yMin = y;
 		}
-			
+		this->textBox1->Text = toSystemString(ss.str());
+		this->chart1->ChartAreas["area"]->AxisX->Minimum = xMin;
+		this->chart1->ChartAreas["area"]->AxisX->Maximum = xMax;
+		this->chart1->ChartAreas["area"]->AxisX->Interval = (xMax - xMin) / 10;
+		this->chart1->ChartAreas["area"]->AxisY->Minimum = yMin;
+		this->chart1->ChartAreas["area"]->AxisY->Maximum = yMax;
+		this->chart1->ChartAreas["area"]->AxisY->Interval = (yMax - yMin) / 10;
 	}
 			 
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {	
@@ -810,9 +837,10 @@ private: System::Void button3_Click(System::Object^  sender, System::EventArgs^ 
 	int tEnd = int::Parse(this->textBox12->Text);
 	string xFunction = toStdString(this->textBox2->Text);
 	string yFunction = toStdString(this->textBox3->Text);
+	int points = int::Parse(this->textBox14->Text);
 	TopologySchema topologySchema = createTopologySchema(toStdString(this->textBox10->Text));
 	TrainingData trainingData("trainingData.txt", WRITE);
-	trainingData.generate(topologySchema, size, tStart, tEnd, xFunction, yFunction);
+	trainingData.generate(topologySchema, size, tStart, tEnd,  points, xFunction, yFunction);
 }
 
 private: System::Void checkBox2_CheckedChanged(System::Object^  sender, System::EventArgs^  e) {

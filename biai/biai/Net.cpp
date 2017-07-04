@@ -7,7 +7,16 @@ Net::Net(const TopologySchema &topologySchema)
 
 Net::Net(string filename)
 {
-	// TODO: implement this constructor
+	fstream file;
+	file.open(filename, fstream::in);
+	topology = createTopology(getTopologySchemaFromFile(file));
+	for (int i = 0; i < topology.size(); ++i)
+		for (int j = 0; j < topology[i].size(); ++j) {
+			string line;
+			getline(file, line);
+			topology[i][j].update(toDoubleVector(line));
+		}
+	file.close();
 }
 
 Net::~Net()
@@ -81,11 +90,8 @@ void Net::getResults(vector<double> &resultValues) const
 
 void Net::save(string filename) {
 	fstream file;
-	file.open(filename, fstream::out);
-	file << "topology:";
-	for (int i = 0; i < topology.size(); ++i) // print sizes of layers
-		file << " " << (topology[i].size()-1);
-	file << endl;
+	file.open(filename, fstream::out);	
+	file << toString(toTopologySchema(topology)) << endl;
 	for (int i = 0; i < topology.size(); ++i)
 		for (int j = 0; j < topology[i].size(); ++j)
 			file << topology[i][j].toString(); // print every neuron

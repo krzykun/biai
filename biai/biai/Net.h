@@ -22,4 +22,3 @@ private:
 	double prv_recentAverageError;
 	double prv_recentAverageSmoothingFactor;
 };
-

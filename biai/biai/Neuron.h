@@ -37,4 +37,5 @@ public:
 	static double eta; //0.0 - 1.0 training rate
 	static double randomWeight(void) { return rand() / double(RAND_MAX);}
 	string toString();
+	void update(vector<double> values);
 };

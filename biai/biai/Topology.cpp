@@ -7,6 +7,7 @@ Topology createTopology(TopologySchema topologySchema) {
 	{
 		topology.push_back(Layer());
 		unsigned howManyOutputs = layerIter == topologySchema.size() - 1 ? 0 : topologySchema[layerIter + 1];
+		auto a = topologySchema[layerIter];
 		for (unsigned neuronIter = 0; neuronIter <= topologySchema[layerIter]; ++neuronIter)
 			topology.back().push_back(Neuron(howManyOutputs, neuronIter));
 		topology.back().back().setOutputValue(1.0);
@@ -16,12 +17,36 @@ Topology createTopology(TopologySchema topologySchema) {
 
 TopologySchema createTopologySchema(string topologySchemaString) {
 	string s = topologySchemaString;
-	vector<std::string> layers;
-	splitString(topologySchemaString, layers);	
+	vector<string> layers = splitString(topologySchemaString);
 	TopologySchema topologySchema;
-	for (int i = 0; i < layers.size(); ++i){
+	for (int i = 0; i < layers.size(); ++i) {
 		int a = atoi(layers.at(i).c_str());
 		topologySchema.push_back(a);
 	}
+	return topologySchema;
+}
+
+TopologySchema getTopologySchemaFromFile(fstream &file) {
+	string line;
+	getline(file, line);
+	return toUnsignedIntVector(line);
+}
+
+string toString(TopologySchema topologySchema) {
+	stringstream ss;
+	auto a = topologySchema.size();
+	if (topologySchema.size() == 0)
+		abort();
+	ss << topologySchema[0];
+	for (int i = 1; i < topologySchema.size(); ++i) {
+		ss << " " << topologySchema[i];
+	}
+	return ss.str();
+}
+
+TopologySchema toTopologySchema(Topology topology) {
+	TopologySchema topologySchema;
+	for (int i = 0; i < topology.size(); i++)
+		topologySchema.push_back(topology[i].size()-1);
 	return topologySchema;
 }

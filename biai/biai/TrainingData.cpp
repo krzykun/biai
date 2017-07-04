@@ -15,28 +15,9 @@ TrainingData::~TrainingData()
 	prv_trainingDataFile.close();
 }
 
-void TrainingData::getTopology(vector<unsigned> &topology)
+void TrainingData::getTopology(TopologySchema &topologySchema)
 {
-	string line,label;
-	getline(prv_trainingDataFile, line);
-	stringstream ss(line);
-	ss >> label;
-	if (this->isEof() || label.compare("topology:") != 0)
-		abort();
-	while (!ss.eof()) {
-		unsigned n;
-		ss >> n;
-		topology.push_back(n);
-	}
-	return;
-}
-
-void TrainingData::setTopology(TopologySchema topologySchema)
-{
-	prv_trainingDataFile << "topology:";
-	for (int i = 0; i < topologySchema.size(); ++i)
-		prv_trainingDataFile << " " << topologySchema.at(i);
-	prv_trainingDataFile << endl;
+	topologySchema = getTopologySchemaFromFile(prv_trainingDataFile);
 }
 
 unsigned TrainingData::getNextInputs(vector<double> &inputValues)
@@ -63,18 +44,17 @@ unsigned TrainingData::getTargetOutputs(vector<double> &targetOutputValues)
 	ss >> label;
 	if (label.compare("out:") == 0) {
 		double oneValue;
-		while (ss >> oneValue) {
+		while (ss >> oneValue)
 			targetOutputValues.push_back(oneValue);
-		}
 	}
 	return targetOutputValues.size();
 }
 
-void TrainingData::generate(TopologySchema topologySchema, int size, int tStart, int tEnd, string xFunction, string yFunction)
+void TrainingData::generate(TopologySchema topologySchema, int size, int tStart, int tEnd, int tDelta, string xFunction, string yFunction)
 {
-	Normalizer xNormalizer(minValue(xFunction, tStart, tEnd), maxValue(xFunction, tStart, tEnd));
-	Normalizer yNormalizer(minValue(yFunction, tStart, tEnd), maxValue(yFunction, tStart, tEnd));
-	setTopology(topologySchema);
+	Normalizer xNormalizer(minValue(xFunction, tStart, tEnd + tDelta), maxValue(xFunction, tStart, tEnd + tDelta));
+	Normalizer yNormalizer(minValue(yFunction, tStart, tEnd + tDelta), maxValue(yFunction, tStart, tEnd + tDelta));
+	prv_trainingDataFile << toString(topologySchema) << endl;
 	for (int i = 0; i < size; ++i) {
 		double t = tStart + ((rand() / double(RAND_MAX)) * (tEnd - tStart));
 		double delta_t = rand() / double(RAND_MAX) / 10;

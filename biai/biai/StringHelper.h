@@ -8,6 +8,9 @@ using namespace std;
 
 void replaceStrings(std::string& str, const std::string& toReplace, const std::string& replacer);
 void splitString(const string& str, vector<string>& v);
+vector<string> splitString(const string& str);
+vector<unsigned> toUnsignedIntVector(string line);
+vector<double> toDoubleVector(string line);
 string toStdString(System::String^ systemString);
 System::String^ toSystemString(string s);
 string showVectorVals(string label, std::vector<double> &v);

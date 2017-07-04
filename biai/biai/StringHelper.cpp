@@ -26,6 +26,28 @@ void splitString(const string& str, vector<string>& v) {
 	}
 }
 
+vector<string> splitString(const string& str) {
+	vector<string> v;
+	splitString(str, v);
+	return v;
+}
+
+vector<unsigned> toUnsignedIntVector(string line) {
+	vector<string> tokens = splitString(line);
+	vector<unsigned> unsignedIntVector;
+	for (int i = 0; i < tokens.size(); ++i)
+		unsignedIntVector.push_back(atoll(tokens[i].c_str()));
+	return unsignedIntVector;
+}
+
+vector<double> toDoubleVector(string line) {
+	vector<string> tokens = splitString(line);
+	vector<double> doubleVector;
+	for (int i = 0; i < tokens.size(); ++i)
+		doubleVector.push_back(stod(tokens[i]));
+	return doubleVector;
+}
+
 string toStdString(System::String^ systemString) {
 	return msclr::interop::marshal_as<std::string>(systemString);
 }

@@ -21,5 +21,5 @@ public:
 	void setTopology(TopologySchema topologySchema);
 	unsigned getNextInputs(vector<double> &inputValues);
 	unsigned getTargetOutputs(vector<double> &targetOutputValues);
-	void generate(TopologySchema topologySchema, int size, int tStart, int tEnd, string xFunction, string yFunction);
+	void generate(TopologySchema topologySchema, int size, int tStart, int tEnd, int tDelta, string xFunction, string yFunction);
 };
