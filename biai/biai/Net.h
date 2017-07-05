@@ -8,7 +8,7 @@ using namespace std;
 class Net
 {
 public:
-	Net(const TopologySchema &topologySchema);
+	Net(const TopologySchema &topologySchema, double alpha, double eta);
 	Net(string fileName);
 	~Net();
 	void feedForward(const vector<double> &inputValues);

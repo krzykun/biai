@@ -57,16 +57,15 @@ void TrainingData::generate(TopologySchema topologySchema, int size, int tStart,
 	prv_trainingDataFile << toString(topologySchema) << endl;
 	for (int i = 0; i < size; ++i) {
 		double t = tStart + ((rand() / double(RAND_MAX)) * (tEnd - tStart));
-		double delta_t = rand() / double(RAND_MAX) / 10;
 		prv_trainingDataFile << "in:";
 		for (int j = 0; j < (topologySchema.front() / 2); ++j) {
-			prv_trainingDataFile << " " << xNormalizer.normalize(solve(xFunction, (t + j * delta_t)));
-			prv_trainingDataFile << " " << yNormalizer.normalize(solve(yFunction, (t + j * delta_t)));
+			prv_trainingDataFile << " " << xNormalizer.normalize(solve(xFunction, (t + j)));
+			prv_trainingDataFile << " " << yNormalizer.normalize(solve(yFunction, (t + j)));
 		}
 		prv_trainingDataFile << endl << "out:";
 		for (int j = 0; j < (topologySchema.back() / 2); ++j) {
-			prv_trainingDataFile << " " << xNormalizer.normalize(solve(xFunction, (t + ((topologySchema.front() / 2) + j) * delta_t)));
-			prv_trainingDataFile << " " << yNormalizer.normalize(solve(yFunction, (t + ((topologySchema.front() / 2) + j) * delta_t)));
+			prv_trainingDataFile << " " << xNormalizer.normalize(solve(xFunction, (t + ((topologySchema.front() / 2) + j))));
+			prv_trainingDataFile << " " << yNormalizer.normalize(solve(yFunction, (t + ((topologySchema.front() / 2) + j))));
 		}
 		prv_trainingDataFile << endl;
 	};

@@ -1,9 +1,6 @@
 #include "Neuron.h"
 
-double Neuron::alpha = 0.5;
-double Neuron::eta = 0.15;
-
-Neuron::Neuron(unsigned howManyOutputs, const unsigned _myIndex) : prv_myIndex(_myIndex)
+Neuron::Neuron(unsigned howManyOutputs, const unsigned _myIndex, double _alpha, double _eta) : prv_myIndex(_myIndex), alpha(_alpha), eta(_eta)
 {
 	for (unsigned con = 0; con < howManyOutputs; ++con)	{
 		prv_outputWeights.push_back(Connection());
@@ -16,6 +13,7 @@ Neuron::Neuron(unsigned howManyOutputs, const unsigned _myIndex) : prv_myIndex(_
 Neuron::~Neuron()
 {
 }
+
 
 void Neuron::feedForward(const Layer &prevLayer)
 {

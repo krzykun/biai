@@ -23,7 +23,7 @@ class Neuron
 	static double transferFunctionDerivative(double x);
 	double prv_gradient;
 public:
-	Neuron(unsigned howManyOutputs, const unsigned _myIndex);
+	Neuron(unsigned howManyOutputs, const unsigned _myIndex, double _alpha, double _eta);
 	~Neuron();
 	void setOutputValue(double outValue) { prv_outputValue = outValue; }
 	double getOutputValue(void) const { return prv_outputValue; }
@@ -33,8 +33,8 @@ public:
 	double sumDOW(const Layer &nextLayer) const;
 	void updateInputWeights(Layer &prevLayer);
 	//all neurons use the same value:
-	static double alpha;	//0.0 - n multiplier of the last weight change (momentum)
-	static double eta; //0.0 - 1.0 training rate
+	double alpha;	//0.0 - n multiplier of the last weight change (momentum)
+	double eta; //0.0 - 1.0 training rate
 	static double randomWeight(void) { return rand() / double(RAND_MAX);}
 	string toString();
 	void update(vector<double> values);

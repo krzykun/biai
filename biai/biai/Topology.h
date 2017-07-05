@@ -10,6 +10,7 @@ typedef vector<unsigned> TopologySchema;
 typedef vector<Neuron> Layer;
 typedef vector<Layer> Topology;
 
+Topology createTopology(TopologySchema topologySchema, double alpha, double eta);
 Topology createTopology(TopologySchema topologySchema);
 TopologySchema createTopologySchema(string topologySchemaString);
 TopologySchema getTopologySchemaFromFile(fstream &file);

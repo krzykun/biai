@@ -1,8 +1,8 @@
 #include "Net.h"
 
-Net::Net(const TopologySchema &topologySchema)
+Net::Net(const TopologySchema &topologySchema, double alpha, double eta)
 {
-	topology = createTopology(topologySchema);
+	topology = createTopology(topologySchema, alpha, eta);
 }
 
 Net::Net(string filename)
