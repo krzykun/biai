@@ -24,3 +24,12 @@ TODO:
 * Parsing more functions: i.e. sin, log
 * Output log pretty print
 * Interface smoothing
+
+TODO after last release:
+* Analysis of other net input functions, other than a square function
+* Transfer functions
+* Mean square error of calculated points and points taken from the source (part of the learning data not used for learning)
+* Test net behaviour for points from i.e. sinus function, that curve in y axis in both diretions intermittently
+* Create end report, and in it:
+  1. Implementation description (external + internal specification, description of most important classes and methods and their uses/arguments)
+  2. Research aspect - examples of specific, interesting cases, test analysis, project conclusions
