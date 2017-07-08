@@ -26,3 +26,6 @@ TODO:
 * Create end report, and in it:
   1. Implementation description (external + internal specification, description of most important classes and methods and their uses/arguments)
   2. Research aspect - examples of specific, interesting cases, test analysis, project conclusions
+
+Optional:
+* Multithreading

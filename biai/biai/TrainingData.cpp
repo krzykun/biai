@@ -15,6 +15,11 @@ TrainingData::~TrainingData()
 	prv_trainingDataFile.close();
 }
 
+void TrainingData::setTopology(TopologySchema topologySchema)
+{
+	prv_trainingDataFile << toString(topologySchema) << endl;
+}
+
 void TrainingData::getTopology(TopologySchema &topologySchema)
 {
 	topologySchema = getTopologySchemaFromFile(prv_trainingDataFile);
@@ -54,7 +59,6 @@ void TrainingData::generate(TopologySchema topologySchema, int size, int tStart,
 {
 	Normalizer xNormalizer(minValue(xFunction, tStart, tEnd + tDelta), maxValue(xFunction, tStart, tEnd + tDelta));
 	Normalizer yNormalizer(minValue(yFunction, tStart, tEnd + tDelta), maxValue(yFunction, tStart, tEnd + tDelta));
-	prv_trainingDataFile << toString(topologySchema) << endl;
 	for (int i = 0; i < size; ++i) {
 		double t = tStart + ((rand() / double(RAND_MAX)) * (tEnd - tStart));
 		prv_trainingDataFile << "in:";

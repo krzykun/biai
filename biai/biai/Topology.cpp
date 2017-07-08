@@ -32,6 +32,12 @@ TopologySchema createTopologySchema(string topologySchemaString) {
 	return topologySchema;
 }
 
+TopologySchema createTopologySchema(int inputPoints, string hiddenLayers) {
+	stringstream ss;
+	ss << inputPoints*2 << " " << hiddenLayers << " 2";
+	return createTopologySchema(ss.str());
+}
+
 TopologySchema getTopologySchemaFromFile(fstream &file) {
 	string line;
 	getline(file, line);

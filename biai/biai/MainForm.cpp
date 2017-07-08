@@ -80,7 +80,7 @@ namespace biai {
 		vector<double> inputs;
 		string xFunction = toStdString(this->textBox2->Text);
 		string yFunction = toStdString(this->textBox3->Text);
-		TopologySchema topologySchema = createTopologySchema(toStdString(this->textBox10->Text));
+		TopologySchema topologySchema = createTopologySchema(int::Parse(this->textBox10->Text), toStdString(this->textBox17->Text));
 		for (int i = (topologySchema[0] / 2); i > 0; --i) {
 			double x = xNormalizer.normalize(solve(xFunction, t - i));
 			double y = yNormalizer.normalize(solve(yFunction, t - i));
@@ -91,7 +91,12 @@ namespace biai {
 	}
 
 	System::Void MainForm::OnClick_btnTest(System::Object^  sender, System::EventArgs^  e) {
-		button1_Click(sender, e);
+		if (this->checkBox6->Checked) {
+			button3_Click(sender, e);
+			Start_Click(sender, e);
+		}
+		if(this->checkBox5->Checked)
+			button1_Click(sender, e);
 		int size = int::Parse(this->textBox11->Text);
 		int tStart = int::Parse(this->textBox13->Text);
 		int tEnd = int::Parse(this->textBox12->Text);
@@ -102,7 +107,8 @@ namespace biai {
 		Normalizer yNormalizer(minValue(yFunction, tStart, tEnd + points), maxValue(yFunction, tStart, tEnd + points));
 		Net myNet("net.txt");
 		stringstream ss;
-		this->chart1->Series["approximate"]->Points->Clear();
+		if (this->checkBox5->Checked)
+			this->chart1->Series["approximate"]->Points->Clear();
 		double xMin = this->chart1->ChartAreas["area"]->AxisX->Minimum;
 		double xMax = this->chart1->ChartAreas["area"]->AxisX->Maximum;
 		double yMin = this->chart1->ChartAreas["area"]->AxisY->Minimum;
@@ -128,24 +134,28 @@ namespace biai {
 			ss << "x error:" << xError << "\t" << "y error:" << yError << "\r\n";
 			double x = xNormalizer.realValue(resultVals[0]);
 			double y = yNormalizer.realValue(resultVals[1]);
-			this->chart1->Series["approximate"]->Points->AddXY(x, y);
-			if (x > xMax)
-				xMax = x;
-			else if (x < xMin)
-				xMin = x;
-			if (y > yMax)
-				yMax = y;
-			else if (y < yMin)
-				yMin = y;
+			if (this->checkBox5->Checked) {
+				this->chart1->Series["approximate"]->Points->AddXY(x, y);
+				if (x > xMax)
+					xMax = x;
+				else if (x < xMin)
+					xMin = x;
+				if (y > yMax)
+					yMax = y;
+				else if (y < yMin)
+					yMin = y;
+			}
 		}
 		ss << "x error square root: " << sqrt(xErrorSum/points) << "\r\n" << "y error square root: " << sqrt(yErrorSum/points);
 		this->textBox1->Text = toSystemString(ss.str());
-		this->chart1->ChartAreas["area"]->AxisX->Minimum = xMin;
-		this->chart1->ChartAreas["area"]->AxisX->Maximum = xMax;
-		this->chart1->ChartAreas["area"]->AxisX->Interval = (xMax - xMin) / 10;
-		this->chart1->ChartAreas["area"]->AxisY->Minimum = yMin;
-		this->chart1->ChartAreas["area"]->AxisY->Maximum = yMax;
-		this->chart1->ChartAreas["area"]->AxisY->Interval = (yMax - yMin) / 10;
+		if (this->checkBox5->Checked) {
+			this->chart1->ChartAreas["area"]->AxisX->Minimum = xMin;
+			this->chart1->ChartAreas["area"]->AxisX->Maximum = xMax;
+			this->chart1->ChartAreas["area"]->AxisX->Interval = (xMax - xMin) / 10;
+			this->chart1->ChartAreas["area"]->AxisY->Minimum = yMin;
+			this->chart1->ChartAreas["area"]->AxisY->Maximum = yMax;
+			this->chart1->ChartAreas["area"]->AxisY->Interval = (yMax - yMin) / 10;
+		}
 	}
 
 	System::Void MainForm::button1_Click(System::Object^  sender, System::EventArgs^  e) {
@@ -202,9 +212,32 @@ namespace biai {
 		string xFunction = toStdString(this->textBox2->Text);
 		string yFunction = toStdString(this->textBox3->Text);
 		int points = int::Parse(this->textBox14->Text);
-		TopologySchema topologySchema = createTopologySchema(toStdString(this->textBox10->Text));
+		TopologySchema topologySchema = createTopologySchema(int::Parse(this->textBox10->Text), toStdString(this->textBox17->Text));
 		TrainingData trainingData("trainingData.txt", WRITE);
-		trainingData.generate(topologySchema, size, tStart, tEnd, points, xFunction, yFunction);
+		this->textBox1->AppendText("\r\nStarting data generation\r\n");
+		if (!this->checkBox4->Checked) {
+			trainingData.setTopology(topologySchema);
+			trainingData.generate(topologySchema, size, tStart, tEnd, points, xFunction, yFunction);
+			this->textBox1->AppendText("Data generated");
+		}
+		else {
+			this->textBox1->Text = "";
+			trainingData.setTopology(topologySchema);
+			do {
+				stringstream ss;
+				if (size > 1000) {
+					ss << "Generating 1000 data... Remaining: " << size-1000 << "\r\n";
+					trainingData.generate(topologySchema, 1000, tStart, tEnd, points, xFunction, yFunction);
+				}
+				else {
+					ss << "Generating " << size << " data... Finish! :)" << "\r\n";
+					trainingData.generate(topologySchema, size, tStart, tEnd, points, xFunction, yFunction);
+				}
+				this->textBox1->AppendText(toSystemString(ss.str()));
+				this->Refresh();
+				size -= 1000;
+			} while (size > 0);
+		}
 	}
 
 	System::Void MainForm::checkBox2_CheckedChanged(System::Object^  sender, System::EventArgs^  e) {
