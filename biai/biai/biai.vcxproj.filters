@@ -63,6 +63,9 @@
     <ClCompile Include="Normalizer.cpp">
       <Filter>Source Files\common</Filter>
     </ClCompile>
+    <ClCompile Include="MainForm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Connection.h">

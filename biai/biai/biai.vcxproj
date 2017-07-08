@@ -147,6 +147,7 @@
     <ClCompile Include="expression_parser_cpp\functions.cpp" />
     <ClCompile Include="expression_parser_cpp\parser.cpp" />
     <ClCompile Include="expression_parser_cpp\variablelist.cpp" />
+    <ClCompile Include="MainForm.cpp" />
     <ClCompile Include="MainFrame.cpp" />
     <ClCompile Include="Net.cpp" />
     <ClCompile Include="Neuron.cpp" />
