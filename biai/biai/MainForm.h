@@ -346,9 +346,9 @@ private: System::Windows::Forms::CheckBox^  checkBox5;
 			this->label30->AutoSize = true;
 			this->label30->Location = System::Drawing::Point(90, 101);
 			this->label30->Name = L"label30";
-			this->label30->Size = System::Drawing::Size(190, 13);
+			this->label30->Size = System::Drawing::Size(194, 13);
 			this->label30->TabIndex = 35;
-			this->label30->Text = L"result diagrams will be saved in jpg files";
+			this->label30->Text = L"result diagrams will be saved in png files";
 			// 
 			// button4
 			// 
@@ -375,7 +375,7 @@ private: System::Windows::Forms::CheckBox^  checkBox5;
 			this->textBox20->Name = L"textBox20";
 			this->textBox20->Size = System::Drawing::Size(80, 20);
 			this->textBox20->TabIndex = 32;
-			this->textBox20->Text = L"100 200";
+			this->textBox20->Text = L"200";
 			// 
 			// label25
 			// 
@@ -410,7 +410,7 @@ private: System::Windows::Forms::CheckBox^  checkBox5;
 			this->textBox22->Name = L"textBox22";
 			this->textBox22->Size = System::Drawing::Size(80, 20);
 			this->textBox22->TabIndex = 28;
-			this->textBox22->Text = L"0.15 0.2";
+			this->textBox22->Text = L"0.2";
 			// 
 			// label28
 			// 
@@ -427,7 +427,7 @@ private: System::Windows::Forms::CheckBox^  checkBox5;
 			this->textBox23->Name = L"textBox23";
 			this->textBox23->Size = System::Drawing::Size(80, 20);
 			this->textBox23->TabIndex = 26;
-			this->textBox23->Text = L"0.4 0.6";
+			this->textBox23->Text = L"0.3";
 			// 
 			// textBox19
 			// 
@@ -470,7 +470,7 @@ private: System::Windows::Forms::CheckBox^  checkBox5;
 			this->textBox21->Name = L"textBox21";
 			this->textBox21->Size = System::Drawing::Size(131, 20);
 			this->textBox21->TabIndex = 21;
-			this->textBox21->Text = L"2000 10000";
+			this->textBox21->Text = L"20000";
 			// 
 			// label21
 			// 

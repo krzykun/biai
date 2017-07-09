@@ -40,9 +40,10 @@ namespace biai {
 		bool draw = this->checkBox5->Checked;
 		TopologySchema topologySchema = createTopologySchema(int::Parse(this->textBox10->Text), toStdString(this->textBox17->Text));
 		stringstream ss;
+		double rootMeanSqureErrorX = 0.0, rootMeanSqureErrorY = 0.0;
 		if (draw)
 			button1_Click(sender, e);
-		approximate(size, tStart, tEnd, ss, xFunction, yFunction, topologySchema, points, this->chart1->ChartAreas["area"], this->chart1->Series["approximate"], draw);
+		approximate(size, tStart, tEnd, ss, xFunction, yFunction, topologySchema, points, this->chart1->ChartAreas["area"], this->chart1->Series["approximate"], draw, rootMeanSqureErrorX, rootMeanSqureErrorY);
 		this->textBox1->Text = toSystemString(ss.str());
 	}
 
@@ -149,6 +150,7 @@ namespace biai {
 		string convertedYFunction = yFunction;
 		replaceStrings(convertedXFunction, "*", " x "); // '*' is invalid in filename
 		replaceStrings(convertedYFunction, "*", " x ");
+		double rootMeanSqureErrorX = 0.0, rootMeanSqureErrorY = 0.0;
 
 		for (int i = 0; i < topologySchemas.size(); i++) {
 			for (int j = 0; j < sizes.size(); j++) {
@@ -158,15 +160,17 @@ namespace biai {
 							createTestData(topologySchemas[i], sizes[j], tStart, tEnd, points[m], xFunction, yFunction, this->textBox1, true);
 							launchLearning(alphas[k], etas[l], ss, this->chart1->ChartAreas["area"], this->chart1->Series["error"], false, false);
 							button1_Click(sender, e);
-							approximate(sizes[j], tStart, tEnd, ss, xFunction, yFunction, topologySchemas[i], points[m], this->chart1->ChartAreas["area"], this->chart1->Series["approximate"], true);
+							approximate(sizes[j], tStart, tEnd, ss, xFunction, yFunction, topologySchemas[i], points[m], this->chart1->ChartAreas["area"], this->chart1->Series["approximate"], true, rootMeanSqureErrorX, rootMeanSqureErrorY);
 							stringstream filename;
 							double a = alphas[k];
 							double b = etas[l];
-							filename << "xFunction " << convertedXFunction << " - yFunction " << convertedYFunction << " - topology " << toString(topologySchemas[i]);
+							string path = "tests results\\xFunction " + convertedXFunction + " - yFunction " + convertedYFunction;
+							CreateDirectory(path.c_str(), NULL);
+							filename << "\\xError " << rootMeanSqureErrorX << " - yError " << rootMeanSqureErrorY << " - topology " << toString(topologySchemas[i]);
 							filename << " - Size " << sizes[j] << " - alpha " << alphas[k] << " - eta " << etas[l] << " - appr.points " << points[m];
 							filename << " - tStart " << tStart << " - tEnd " << tEnd << ".png";
 							string s = filename.str();
-							chart1->SaveImage(toSystemString("tests results\\"+filename.str()), Imaging::ImageFormat::Png);
+							chart1->SaveImage(toSystemString(path+filename.str()), Imaging::ImageFormat::Png);
 						}
 					}
 				}

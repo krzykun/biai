@@ -63,7 +63,7 @@ void launchLearning(double alpha, double eta, stringstream& ss, System::Windows:
 }
 
 
-void approximate(int size, int tStart, int tEnd, stringstream& ss, string xFunction, string yFunction, TopologySchema topologySchema, int points, System::Windows::Forms::DataVisualization::Charting::ChartArea^ chartArea, System::Windows::Forms::DataVisualization::Charting::Series^ chartSeries, bool draw){
+void approximate(int size, int tStart, int tEnd, stringstream& ss, string xFunction, string yFunction, TopologySchema topologySchema, int points, System::Windows::Forms::DataVisualization::Charting::ChartArea^ chartArea, System::Windows::Forms::DataVisualization::Charting::Series^ chartSeries, bool draw, double& rootMeanSqureErrorX, double& rootMeanSqureErrorY){
 	Normalizer xNormalizer(minValue(xFunction, tStart, tEnd + points), maxValue(xFunction, tStart, tEnd + points));
 	Normalizer yNormalizer(minValue(yFunction, tStart, tEnd + points), maxValue(yFunction, tStart, tEnd + points));
 	Net myNet("net.txt");
@@ -106,7 +106,9 @@ void approximate(int size, int tStart, int tEnd, stringstream& ss, string xFunct
 				yMin = y;
 		}
 	}
-	ss << "x error square root: " << sqrt(xErrorSum / points) << "\r\n" << "y error square root: " << sqrt(yErrorSum / points);
+	rootMeanSqureErrorX = sqrt(xErrorSum / points);
+	rootMeanSqureErrorY = sqrt(yErrorSum / points);
+	ss << "x error square root: " << rootMeanSqureErrorX << "\r\n" << "y error square root: " << rootMeanSqureErrorY;
 	if (draw) {
 		chartArea->AxisX->Minimum = xMin;
 		chartArea->AxisX->Maximum = xMax;
