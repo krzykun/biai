@@ -9,43 +9,56 @@ void replaceStrings(std::string& str, const std::string& toReplace, const std::s
 	}
 }
 
-void splitString(const string& str, vector<string>& v) {
-	stringstream ss(str);
-	ss >> noskipws;
-	string field;
-	char ws_delim;
-	while (1) {
-		if (ss >> field)
-			v.push_back(field);
-		else if (ss.eof())
-			break;
-		else
-			v.push_back(string());
-		ss.clear();
-		ss >> ws_delim;
-	}
+vector<string> splitByChar(const string str, const char c) {
+	std::stringstream ss(str);
+	std::string segment;
+	std::vector<std::string> seglist;
+	while (std::getline(ss, segment, c))
+		seglist.push_back(segment);
+	return seglist;
 }
 
-vector<string> splitString(const string& str) {
-	vector<string> v;
-	splitString(str, v);
-	return v;
+vector<string> splitBySpaces(const string& str) {
+	return splitByChar(str, ' ');
+}
+
+vector<string> splitBySpaces(System::String^ systemString) {
+	return splitBySpaces(toStdString(systemString));
+}
+
+vector<string> splitByCommas(const string str) {
+	return splitByChar(str, ',');
+}
+
+vector<string> splitByCommas(System::String^ systemString) {
+	return splitByCommas(toStdString(systemString));
 }
 
 vector<unsigned> toUnsignedIntVector(string line) {
-	vector<string> tokens = splitString(line);
+	vector<string> tokens = splitBySpaces(line);
 	vector<unsigned> unsignedIntVector;
 	for (int i = 0; i < tokens.size(); ++i)
 		unsignedIntVector.push_back(atoll(tokens[i].c_str()));
 	return unsignedIntVector;
 }
 
+vector<unsigned> toUnsignedIntVector(System::String^ systemString) {
+	return toUnsignedIntVector(toStdString(systemString));
+}
+
 vector<double> toDoubleVector(string line) {
-	vector<string> tokens = splitString(line);
+	vector<string> tokens = splitBySpaces(line);
 	vector<double> doubleVector;
-	for (int i = 0; i < tokens.size(); ++i)
+	for (int i = 0; i < tokens.size(); ++i) {
+		string str = tokens[i];
+		double t = stod(tokens[i]);
 		doubleVector.push_back(stod(tokens[i]));
+	}
 	return doubleVector;
+}
+
+vector<double> toDoubleVector(System::String^ systemString) {
+	return toDoubleVector(toStdString(systemString));
 }
 
 string toStdString(System::String^ systemString) {

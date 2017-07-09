@@ -1,6 +1,6 @@
 #pragma once
 #include "expression_parser_cpp/parser.h"
-#include "StringHelper.h"
+#include "../StringHelper.h"
 #include <sstream>  
 #include <string>
 #include <algorithm>

@@ -143,42 +143,44 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="expression_parser_cpp\error.cpp" />
-    <ClCompile Include="expression_parser_cpp\functions.cpp" />
-    <ClCompile Include="expression_parser_cpp\parser.cpp" />
-    <ClCompile Include="expression_parser_cpp\variablelist.cpp" />
-    <ClCompile Include="MainForm.cpp" />
-    <ClCompile Include="MainFrame.cpp" />
-    <ClCompile Include="Net.cpp" />
-    <ClCompile Include="Neuron.cpp" />
-    <ClCompile Include="Expression.cpp" />
-    <ClCompile Include="Normalizer.cpp" />
-    <ClCompile Include="StringHelper.cpp" />
-    <ClCompile Include="Topology.cpp" />
-    <ClCompile Include="TrainingData.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Connection.h" />
-    <ClInclude Include="Expression.h" />
-    <ClInclude Include="expression_parser_cpp\constants.h" />
-    <ClInclude Include="expression_parser_cpp\error.h" />
-    <ClInclude Include="expression_parser_cpp\functions.h" />
-    <ClInclude Include="expression_parser_cpp\parser.h" />
-    <ClInclude Include="expression_parser_cpp\variablelist.h" />
+    <ClInclude Include="common\expression\Expression.h" />
+    <ClInclude Include="common\expression\expression_parser_cpp\constants.h" />
+    <ClInclude Include="common\expression\expression_parser_cpp\error.h" />
+    <ClInclude Include="common\expression\expression_parser_cpp\functions.h" />
+    <ClInclude Include="common\expression\expression_parser_cpp\parser.h" />
+    <ClInclude Include="common\expression\expression_parser_cpp\variablelist.h" />
+    <ClInclude Include="common\Normalizer.h" />
+    <ClInclude Include="common\StringHelper.h" />
     <ClInclude Include="MainForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="Net.h" />
-    <ClInclude Include="Neuron.h" />
-    <ClInclude Include="Normalizer.h" />
-    <ClInclude Include="StringHelper.h" />
-    <ClInclude Include="Topology.h" />
-    <ClInclude Include="TrainingData.h" />
+    <ClInclude Include="neutralNetwork\model\Connection.h" />
+    <ClInclude Include="neutralNetwork\model\Net.h" />
+    <ClInclude Include="neutralNetwork\model\Neuron.h" />
+    <ClInclude Include="neutralNetwork\model\Topology.h" />
+    <ClInclude Include="neutralNetwork\model\TrainingData.h" />
+    <ClInclude Include="neutralNetwork\neutralNetwork.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.h</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="common\expression\Expression.cpp" />
+    <ClCompile Include="common\expression\expression_parser_cpp\error.cpp" />
+    <ClCompile Include="common\expression\expression_parser_cpp\functions.cpp" />
+    <ClCompile Include="common\expression\expression_parser_cpp\parser.cpp" />
+    <ClCompile Include="common\expression\expression_parser_cpp\variablelist.cpp" />
+    <ClCompile Include="common\Normalizer.cpp" />
+    <ClCompile Include="common\StringHelper.cpp" />
+    <ClCompile Include="MainForm.cpp" />
+    <ClCompile Include="MainFrame.cpp" />
+    <ClCompile Include="neutralNetwork\model\Net.cpp" />
+    <ClCompile Include="neutralNetwork\model\Neuron.cpp" />
+    <ClCompile Include="neutralNetwork\model\Topology.cpp" />
+    <ClCompile Include="neutralNetwork\model\TrainingData.cpp" />
+    <ClCompile Include="neutralNetwork\neutralNetwork.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,6 +1,3 @@
-#include "Net.h"
-#include "Neuron.h"
-#include "TrainingData.h"
 #include <stdio.h>
 #include <iostream>
 #include <vector>

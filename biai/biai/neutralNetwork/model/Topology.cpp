@@ -23,7 +23,7 @@ Topology createTopology(TopologySchema topologySchema) {
 
 TopologySchema createTopologySchema(string topologySchemaString) {
 	string s = topologySchemaString;
-	vector<string> layers = splitString(topologySchemaString);
+	vector<string> layers = splitBySpaces(topologySchemaString);
 	TopologySchema topologySchema;
 	for (int i = 0; i < layers.size(); ++i) {
 		int a = atoi(layers.at(i).c_str());
@@ -36,6 +36,14 @@ TopologySchema createTopologySchema(int inputPoints, string hiddenLayers) {
 	stringstream ss;
 	ss << inputPoints*2 << " " << hiddenLayers << " 2";
 	return createTopologySchema(ss.str());
+}
+
+vector<TopologySchema> createTopologySchemas(vector<unsigned> inputs, vector<string> hiddenLayers) {
+	vector<TopologySchema> topologySchemas;
+	for (int i = 0; i < inputs.size(); i++)
+		for (int j = 0; j < hiddenLayers.size(); j++)
+			topologySchemas.push_back(createTopologySchema(inputs[i], hiddenLayers[j]));
+	return topologySchemas;
 }
 
 TopologySchema getTopologySchemaFromFile(fstream &file) {

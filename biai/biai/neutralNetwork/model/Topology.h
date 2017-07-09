@@ -1,6 +1,6 @@
 #pragma once
 #include "Neuron.h"
-#include "StringHelper.h"
+#include "../../common/StringHelper.h"
 #include <vector>
 #include <string>
 #include <fstream>
@@ -15,5 +15,6 @@ Topology createTopology(TopologySchema topologySchema);
 TopologySchema createTopologySchema(string topologySchemaString);
 TopologySchema createTopologySchema(int inputPoints, string hiddenLayers);
 TopologySchema getTopologySchemaFromFile(fstream &file);
+vector<TopologySchema> createTopologySchemas(vector<unsigned> inputs, vector<string> hiddenLayers);
 string toString(TopologySchema);
 TopologySchema toTopologySchema(Topology topology);

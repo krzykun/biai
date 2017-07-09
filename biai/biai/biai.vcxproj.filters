@@ -14,106 +14,130 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="Header Files\common">
-      <UniqueIdentifier>{a562e941-1276-4c63-867d-68d211cd29ea}</UniqueIdentifier>
+      <UniqueIdentifier>{ff2bf50e-a944-4a7e-a4de-bd1ac7a589f1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\common\expression_parser">
-      <UniqueIdentifier>{15c2d874-17aa-4c70-9c10-5ab3028521ca}</UniqueIdentifier>
+    <Filter Include="Header Files\neutralNetwork">
+      <UniqueIdentifier>{7497e3da-ca01-40a8-acaa-b59ecc271bdd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\neutralNetwork">
+      <UniqueIdentifier>{00fa92a4-368b-4a5f-b29b-35c2464aeeed}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\common">
-      <UniqueIdentifier>{92823e18-f71d-458c-9bc0-fae89281e826}</UniqueIdentifier>
+      <UniqueIdentifier>{adf67bc7-d3f8-4482-bee1-35be608020fa}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\common\expression_parser">
-      <UniqueIdentifier>{349671f9-195a-4f4f-8e77-07dcc301008e}</UniqueIdentifier>
+    <Filter Include="Source Files\common\expression">
+      <UniqueIdentifier>{7f2cd77e-1998-4213-a360-9b67bec72e82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\common\expression\expression_parser">
+      <UniqueIdentifier>{2d28f96a-067d-4e6e-b1da-5ff832a07e09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\common\expression">
+      <UniqueIdentifier>{269dcac8-c004-4227-9452-ebcc7b211b43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\common\expression\expression_parser">
+      <UniqueIdentifier>{a5aef0e0-9f43-4b3b-826a-5240a81d0d79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\neutralNetwork\model">
+      <UniqueIdentifier>{e708a2da-b7f6-4291-a419-630e66f54a6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\neutralNetwork\model">
+      <UniqueIdentifier>{71b213e4-7db2-42c5-a158-378b94abf010}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Net.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Neuron.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TrainingData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MainFrame.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="expression_parser_cpp\error.cpp">
-      <Filter>Source Files\common\expression_parser</Filter>
-    </ClCompile>
-    <ClCompile Include="expression_parser_cpp\functions.cpp">
-      <Filter>Source Files\common\expression_parser</Filter>
-    </ClCompile>
-    <ClCompile Include="expression_parser_cpp\parser.cpp">
-      <Filter>Source Files\common\expression_parser</Filter>
-    </ClCompile>
-    <ClCompile Include="expression_parser_cpp\variablelist.cpp">
-      <Filter>Source Files\common\expression_parser</Filter>
-    </ClCompile>
-    <ClCompile Include="Expression.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Topology.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="StringHelper.cpp">
-      <Filter>Source Files\common</Filter>
-    </ClCompile>
-    <ClCompile Include="Normalizer.cpp">
-      <Filter>Source Files\common</Filter>
-    </ClCompile>
-    <ClCompile Include="MainForm.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Connection.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Net.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Neuron.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TrainingData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MainForm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="expression_parser_cpp\constants.h">
-      <Filter>Header Files\common\expression_parser</Filter>
+    <ClInclude Include="common\expression\expression_parser_cpp\constants.h">
+      <Filter>Header Files\common\expression\expression_parser</Filter>
     </ClInclude>
-    <ClInclude Include="expression_parser_cpp\error.h">
-      <Filter>Header Files\common\expression_parser</Filter>
+    <ClInclude Include="common\expression\expression_parser_cpp\error.h">
+      <Filter>Header Files\common\expression\expression_parser</Filter>
     </ClInclude>
-    <ClInclude Include="expression_parser_cpp\functions.h">
-      <Filter>Header Files\common\expression_parser</Filter>
+    <ClInclude Include="common\expression\expression_parser_cpp\functions.h">
+      <Filter>Header Files\common\expression\expression_parser</Filter>
     </ClInclude>
-    <ClInclude Include="expression_parser_cpp\parser.h">
-      <Filter>Header Files\common\expression_parser</Filter>
+    <ClInclude Include="common\expression\expression_parser_cpp\parser.h">
+      <Filter>Header Files\common\expression\expression_parser</Filter>
     </ClInclude>
-    <ClInclude Include="expression_parser_cpp\variablelist.h">
-      <Filter>Header Files\common\expression_parser</Filter>
+    <ClInclude Include="common\expression\expression_parser_cpp\variablelist.h">
+      <Filter>Header Files\common\expression\expression_parser</Filter>
     </ClInclude>
-    <ClInclude Include="Expression.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="common\expression\Expression.h">
+      <Filter>Header Files\common\expression</Filter>
     </ClInclude>
-    <ClInclude Include="Topology.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="StringHelper.h">
+    <ClInclude Include="common\Normalizer.h">
       <Filter>Header Files\common</Filter>
     </ClInclude>
-    <ClInclude Include="Normalizer.h">
+    <ClInclude Include="common\StringHelper.h">
       <Filter>Header Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="neutralNetwork\neutralNetwork.h">
+      <Filter>Header Files\neutralNetwork</Filter>
+    </ClInclude>
+    <ClInclude Include="neutralNetwork\model\Connection.h">
+      <Filter>Header Files\neutralNetwork\model</Filter>
+    </ClInclude>
+    <ClInclude Include="neutralNetwork\model\Net.h">
+      <Filter>Header Files\neutralNetwork\model</Filter>
+    </ClInclude>
+    <ClInclude Include="neutralNetwork\model\Neuron.h">
+      <Filter>Header Files\neutralNetwork\model</Filter>
+    </ClInclude>
+    <ClInclude Include="neutralNetwork\model\Topology.h">
+      <Filter>Header Files\neutralNetwork\model</Filter>
+    </ClInclude>
+    <ClInclude Include="neutralNetwork\model\TrainingData.h">
+      <Filter>Header Files\neutralNetwork\model</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainForm.resx">
       <Filter>Resource Files</Filter>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="MainForm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MainFrame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Normalizer.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="common\StringHelper.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="common\expression\Expression.cpp">
+      <Filter>Source Files\common\expression</Filter>
+    </ClCompile>
+    <ClCompile Include="common\expression\expression_parser_cpp\error.cpp">
+      <Filter>Source Files\common\expression\expression_parser</Filter>
+    </ClCompile>
+    <ClCompile Include="common\expression\expression_parser_cpp\functions.cpp">
+      <Filter>Source Files\common\expression\expression_parser</Filter>
+    </ClCompile>
+    <ClCompile Include="common\expression\expression_parser_cpp\parser.cpp">
+      <Filter>Source Files\common\expression\expression_parser</Filter>
+    </ClCompile>
+    <ClCompile Include="common\expression\expression_parser_cpp\variablelist.cpp">
+      <Filter>Source Files\common\expression\expression_parser</Filter>
+    </ClCompile>
+    <ClCompile Include="neutralNetwork\neutralNetwork.cpp">
+      <Filter>Source Files\neutralNetwork</Filter>
+    </ClCompile>
+    <ClCompile Include="neutralNetwork\model\Net.cpp">
+      <Filter>Source Files\neutralNetwork\model</Filter>
+    </ClCompile>
+    <ClCompile Include="neutralNetwork\model\Neuron.cpp">
+      <Filter>Source Files\neutralNetwork\model</Filter>
+    </ClCompile>
+    <ClCompile Include="neutralNetwork\model\Topology.cpp">
+      <Filter>Source Files\neutralNetwork\model</Filter>
+    </ClCompile>
+    <ClCompile Include="neutralNetwork\model\TrainingData.cpp">
+      <Filter>Source Files\neutralNetwork\model</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

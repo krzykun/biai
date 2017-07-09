@@ -1,7 +1,7 @@
 #pragma once
 #include "Topology.h"
-#include "Expression.h"
-#include "Normalizer.h"
+#include "../../common/expression/Expression.h"
+#include "../../common/Normalizer.h"
 #include <string>
 #include <vector>
 #include <fstream>
