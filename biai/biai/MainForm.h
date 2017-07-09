@@ -344,7 +344,7 @@ private: System::Windows::Forms::CheckBox^  checkBox5;
 			// label30
 			// 
 			this->label30->AutoSize = true;
-			this->label30->Location = System::Drawing::Point(90, 101);
+			this->label30->Location = System::Drawing::Point(80, 101);
 			this->label30->Name = L"label30";
 			this->label30->Size = System::Drawing::Size(194, 13);
 			this->label30->TabIndex = 35;
@@ -389,7 +389,7 @@ private: System::Windows::Forms::CheckBox^  checkBox5;
 			// label26
 			// 
 			this->label26->AutoSize = true;
-			this->label26->Location = System::Drawing::Point(282, 13);
+			this->label26->Location = System::Drawing::Point(282, 11);
 			this->label26->Name = L"label26";
 			this->label26->Size = System::Drawing::Size(83, 13);
 			this->label26->TabIndex = 30;
@@ -449,7 +449,7 @@ private: System::Windows::Forms::CheckBox^  checkBox5;
 			// label22
 			// 
 			this->label22->AutoSize = true;
-			this->label22->Location = System::Drawing::Point(74, 13);
+			this->label22->Location = System::Drawing::Point(74, 11);
 			this->label22->Name = L"label22";
 			this->label22->Size = System::Drawing::Size(83, 13);
 			this->label22->TabIndex = 23;

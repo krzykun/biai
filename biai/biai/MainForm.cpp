@@ -157,6 +157,7 @@ namespace biai {
 				for (int k = 0; k < alphas.size(); k++) {
 					for (int l = 0; l < etas.size(); l++) {
 						for (int m = 0; m < points.size(); m++) {
+							ss.clear();
 							createTestData(topologySchemas[i], sizes[j], tStart, tEnd, points[m], xFunction, yFunction, this->textBox1, true);
 							launchLearning(alphas[k], etas[l], ss, this->chart1->ChartAreas["area"], this->chart1->Series["error"], false, false);
 							button1_Click(sender, e);
@@ -168,9 +169,13 @@ namespace biai {
 							CreateDirectory(path.c_str(), NULL);
 							filename << "\\xError " << rootMeanSqureErrorX << " - yError " << rootMeanSqureErrorY << " - topology " << toString(topologySchemas[i]);
 							filename << " - Size " << sizes[j] << " - alpha " << alphas[k] << " - eta " << etas[l] << " - appr.points " << points[m];
-							filename << " - tStart " << tStart << " - tEnd " << tEnd << ".png";
+							filename << " - tStart " << tStart << " - tEnd " << tEnd;
 							string s = filename.str();
-							chart1->SaveImage(toSystemString(path+filename.str()), Imaging::ImageFormat::Png);
+							chart1->SaveImage(toSystemString(path+filename.str()+".png"), Imaging::ImageFormat::Png);
+							fstream logFile;
+							logFile.open(path+filename.str() + ".log", fstream::out);
+							logFile << ss.str();
+							logFile.close();
 						}
 					}
 				}
