@@ -141,6 +141,7 @@ namespace biai {
 		vector<double> alphas = toDoubleVector(this->textBox23->Text);
 		vector<double> etas = toDoubleVector(this->textBox22->Text);
 		vector<unsigned> points = toUnsignedIntVector(this->textBox20->Text);
+		bool log = this->checkBox6->Checked;
 		stringstream ss;
 		int tStart = int::Parse(this->textBox13->Text);
 		int tEnd = int::Parse(this->textBox12->Text);
@@ -171,11 +172,13 @@ namespace biai {
 							filename << " - Size " << sizes[j] << " - alpha " << alphas[k] << " - eta " << etas[l] << " - appr.points " << points[m];
 							filename << " - tStart " << tStart << " - tEnd " << tEnd;
 							string s = filename.str();
-							chart1->SaveImage(toSystemString(path+filename.str()+".png"), Imaging::ImageFormat::Png);
-							fstream logFile;
-							logFile.open(path+filename.str() + ".log", fstream::out);
-							logFile << ss.str();
-							logFile.close();
+							chart1->SaveImage(toSystemString(path + filename.str() + ".png"), Imaging::ImageFormat::Png);
+							if(log){
+								fstream logFile;
+								logFile.open(path + filename.str() + ".log", fstream::out);
+								logFile << ss.str();
+								logFile.close();
+							}
 						}
 					}
 				}

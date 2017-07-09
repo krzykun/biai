@@ -125,6 +125,7 @@ namespace biai {
 	private: System::Windows::Forms::Label^  label21;
 	private: System::Windows::Forms::TextBox^  textBox18;
 private: System::Windows::Forms::CheckBox^  checkBox5;
+private: System::Windows::Forms::CheckBox^  checkBox6;
 
 	private: System::Windows::Forms::TextBox^  textBox16;
 
@@ -224,6 +225,7 @@ private: System::Windows::Forms::CheckBox^  checkBox5;
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
+			this->checkBox6 = (gcnew System::Windows::Forms::CheckBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart1))->BeginInit();
 			this->grpBoxOutput->SuspendLayout();
 			this->grpBoxChart->SuspendLayout();
@@ -317,6 +319,7 @@ private: System::Windows::Forms::CheckBox^  checkBox5;
 			// 
 			// groupBox6
 			// 
+			this->groupBox6->Controls->Add(this->checkBox6);
 			this->groupBox6->Controls->Add(this->label30);
 			this->groupBox6->Controls->Add(this->button4);
 			this->groupBox6->Controls->Add(this->label29);
@@ -344,11 +347,11 @@ private: System::Windows::Forms::CheckBox^  checkBox5;
 			// label30
 			// 
 			this->label30->AutoSize = true;
-			this->label30->Location = System::Drawing::Point(80, 101);
+			this->label30->Location = System::Drawing::Point(189, 101);
 			this->label30->Name = L"label30";
-			this->label30->Size = System::Drawing::Size(194, 13);
+			this->label30->Size = System::Drawing::Size(90, 13);
 			this->label30->TabIndex = 35;
-			this->label30->Text = L"result diagrams will be saved in png files";
+			this->label30->Text = L"results in png files";
 			// 
 			// button4
 			// 
@@ -968,6 +971,16 @@ private: System::Windows::Forms::CheckBox^  checkBox5;
 			this->panel1->Name = L"panel1";
 			this->panel1->Size = System::Drawing::Size(1273, 604);
 			this->panel1->TabIndex = 8;
+			// 
+			// checkBox6
+			// 
+			this->checkBox6->AutoSize = true;
+			this->checkBox6->Location = System::Drawing::Point(6, 103);
+			this->checkBox6->Name = L"checkBox6";
+			this->checkBox6->Size = System::Drawing::Size(82, 17);
+			this->checkBox6->TabIndex = 36;
+			this->checkBox6->Text = L"with logging";
+			this->checkBox6->UseVisualStyleBackColor = true;
 			// 
 			// MainForm
 			// 
