@@ -10,6 +10,9 @@ typedef string Function;
 
 void replaceStrings(const std::string& str, const std::string& toReplace, const std::string& replacer);
 string replaceParameterT(Function expression, double parameter);
+//TODO: string replaceCommonFunctions(Function expression); //sin, cos etc.
+string solveBrackets(Function expression);
+double solve(Function expression);
 double solve(Function expression, double parameterT);
 double maxValue(Function function, int tStart, int tEnd);
 double minValue(Function function, int tStart, int tEnd);
