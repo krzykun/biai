@@ -159,6 +159,7 @@ private: System::Windows::Forms::CheckBox^  checkBox6;
 			this->btnLaunchTest = (gcnew System::Windows::Forms::Button());
 			this->grpBoxInputs = (gcnew System::Windows::Forms::GroupBox());
 			this->groupBox6 = (gcnew System::Windows::Forms::GroupBox());
+			this->checkBox6 = (gcnew System::Windows::Forms::CheckBox());
 			this->label30 = (gcnew System::Windows::Forms::Label());
 			this->button4 = (gcnew System::Windows::Forms::Button());
 			this->label29 = (gcnew System::Windows::Forms::Label());
@@ -225,7 +226,6 @@ private: System::Windows::Forms::CheckBox^  checkBox6;
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
-			this->checkBox6 = (gcnew System::Windows::Forms::CheckBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart1))->BeginInit();
 			this->grpBoxOutput->SuspendLayout();
 			this->grpBoxChart->SuspendLayout();
@@ -344,6 +344,16 @@ private: System::Windows::Forms::CheckBox^  checkBox6;
 			this->groupBox6->TabStop = false;
 			this->groupBox6->Text = L"Autotests";
 			// 
+			// checkBox6
+			// 
+			this->checkBox6->AutoSize = true;
+			this->checkBox6->Location = System::Drawing::Point(6, 103);
+			this->checkBox6->Name = L"checkBox6";
+			this->checkBox6->Size = System::Drawing::Size(82, 17);
+			this->checkBox6->TabIndex = 36;
+			this->checkBox6->Text = L"with logging";
+			this->checkBox6->UseVisualStyleBackColor = true;
+			// 
 			// label30
 			// 
 			this->label30->AutoSize = true;
@@ -378,7 +388,7 @@ private: System::Windows::Forms::CheckBox^  checkBox6;
 			this->textBox20->Name = L"textBox20";
 			this->textBox20->Size = System::Drawing::Size(80, 20);
 			this->textBox20->TabIndex = 32;
-			this->textBox20->Text = L"200";
+			this->textBox20->Text = L"300";
 			// 
 			// label25
 			// 
@@ -438,7 +448,7 @@ private: System::Windows::Forms::CheckBox^  checkBox6;
 			this->textBox19->Name = L"textBox19";
 			this->textBox19->Size = System::Drawing::Size(131, 20);
 			this->textBox19->TabIndex = 25;
-			this->textBox19->Text = L"6 4,8";
+			this->textBox19->Text = L"8 8";
 			// 
 			// label23
 			// 
@@ -473,7 +483,7 @@ private: System::Windows::Forms::CheckBox^  checkBox6;
 			this->textBox21->Name = L"textBox21";
 			this->textBox21->Size = System::Drawing::Size(131, 20);
 			this->textBox21->TabIndex = 21;
-			this->textBox21->Text = L"20000";
+			this->textBox21->Text = L"200000";
 			// 
 			// label21
 			// 
@@ -490,7 +500,7 @@ private: System::Windows::Forms::CheckBox^  checkBox6;
 			this->textBox18->Name = L"textBox18";
 			this->textBox18->Size = System::Drawing::Size(131, 20);
 			this->textBox18->TabIndex = 17;
-			this->textBox18->Text = L"2 3 4";
+			this->textBox18->Text = L"2 3";
 			// 
 			// groupBox5
 			// 
@@ -878,7 +888,7 @@ private: System::Windows::Forms::CheckBox^  checkBox6;
 			this->textBox12->Name = L"textBox12";
 			this->textBox12->Size = System::Drawing::Size(50, 20);
 			this->textBox12->TabIndex = 23;
-			this->textBox12->Text = L"2001";
+			this->textBox12->Text = L"1501";
 			// 
 			// label11
 			// 
@@ -943,7 +953,7 @@ private: System::Windows::Forms::CheckBox^  checkBox6;
 			this->textBox3->Name = L"textBox3";
 			this->textBox3->Size = System::Drawing::Size(163, 20);
 			this->textBox3->TabIndex = 2;
-			this->textBox3->Text = L"t*t-2000*t";
+			this->textBox3->Text = L"sin(0.002*t)";
 			// 
 			// label1
 			// 
@@ -960,7 +970,7 @@ private: System::Windows::Forms::CheckBox^  checkBox6;
 			this->textBox2->Name = L"textBox2";
 			this->textBox2->Size = System::Drawing::Size(163, 20);
 			this->textBox2->TabIndex = 0;
-			this->textBox2->Text = L"2*t";
+			this->textBox2->Text = L"-1*cos(0.002*t)";
 			// 
 			// panel1
 			// 
@@ -971,16 +981,6 @@ private: System::Windows::Forms::CheckBox^  checkBox6;
 			this->panel1->Name = L"panel1";
 			this->panel1->Size = System::Drawing::Size(1273, 604);
 			this->panel1->TabIndex = 8;
-			// 
-			// checkBox6
-			// 
-			this->checkBox6->AutoSize = true;
-			this->checkBox6->Location = System::Drawing::Point(6, 103);
-			this->checkBox6->Name = L"checkBox6";
-			this->checkBox6->Size = System::Drawing::Size(82, 17);
-			this->checkBox6->TabIndex = 36;
-			this->checkBox6->Text = L"with logging";
-			this->checkBox6->UseVisualStyleBackColor = true;
 			// 
 			// MainForm
 			// 

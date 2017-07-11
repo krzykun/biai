@@ -9,9 +9,9 @@ using namespace::std;
 typedef string Function;
 
 void replaceStrings(const std::string& str, const std::string& toReplace, const std::string& replacer);
-string replaceParameterT(Function expression, double parameter);
-//TODO: string replaceCommonFunctions(Function expression); //sin, cos etc.
-string solveBrackets(Function expression);
+Function replaceParameterT(Function expression, double parameter);
+Function commonFunctions(Function expression); // sin, cos, abs, tan, log - valid: sin(cos(tan(log(abs(x))) - invalid: sin(x) + cos(y)
+Function solveBrackets(Function expression);
 double solve(Function expression);
 double solve(Function expression, double parameterT);
 double maxValue(Function function, int tStart, int tEnd);
