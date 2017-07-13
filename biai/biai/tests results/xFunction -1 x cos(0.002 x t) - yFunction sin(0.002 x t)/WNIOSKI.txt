@@ -1,1 +1,8 @@
-w przedziale ucz¹cym znajduje sie za ma³y fragment funkcji, aby sieæ mog³a siê jej dobrze nauczyæ
+przedzia³ 0-1501: w przedziale ucz¹cym znajduje sie za ma³y fragment funkcji, aby sieæ mog³a siê jej dobrze nauczyæ. Nie widaæ "zawiniêcia funkcji"
+Wykres do raportu:
+xError 0.0370744 - yError 0.152555 - topology 8 8 8 2 - Size 500000 - alpha 0.4 - eta 0.2 - appr.points 300 - tStart 0 - tEnd 1501.png
+
+
+przedzia³ 0-3001: wystarczaj¹cy przedzia³ do poprawnego dzia³ania sieci.
+Wykres do raportu:
+xError 0.00148433 - yError 0.0113693 - topology 6 8 8 2 - Size 500000 - alpha 0.3 - eta 0.2 - appr.points 300 - tStart 0 - tEnd 3001.png
