@@ -1,0 +1,14 @@
+Dodatkowe warstwy sieci nie zawsze pomagaj¹. 
+W przypadku funkcji 
+x = abs(sin(0.05*t))+0.01*t
+y = t
+Zwiêkszenie topologii z 4 8 8 2 do 4 8 8 8 2 nie pomog³o. B³¹d nawet siê zwiêkszy³ co naszym zdaniem wynika ze zbyt ma³ej iloœci danych ucz¹cych.
+
+xError 0.429911 - yError 58.4044 - topology 4 8 8 2 - Size 500000 - alpha 0.2 - eta 0.2 - appr.points 300 - tStart 0 - tEnd 1501.png
+
+xError 0.847951 - yError 91.2454 - topology 4 8 8 8 2 - Size 500000 - alpha 0.2 - eta 0.2 - appr.points 300 - tStart 0 - tEnd 1501.png
+
+Zwiêkszenie liczby danych ucz¹cych do 1000000 pomog³o zmniejszyæ b³¹d, jednak ci¹gle jest on wiêkszy ni¿ dla topologii 4 8 8 2:
+xError 0.653151 - yError 67.1153 - topology 4 8 8 8 2 - Size 1000000 - alpha 0.2 - eta 0.2 - appr.points 300 - tStart 0 - tEnd 1501
+
+Prawdopodobnie dopiero kolejne zwiêkszenie pozwoli³oby na osi¹gniêcie lepszego wyniku dla wiêkszej topologii, jednak dla takiej konfiguracji czas obliczeñ jest zbyt du¿y, dlatego zaprzestaliœmy kolejnych testów dla tej funkcji.

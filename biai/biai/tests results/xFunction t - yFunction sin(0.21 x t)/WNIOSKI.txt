@@ -1,0 +1,12 @@
+Dla wiêkszoœci podstawowych funkcji topologia 4 8 8 2 jest wystarczaj¹ca. Wystarczaj¹cy jest tak¿e zbiór 500000 danych testowych.
+
+xError 46.5979 - yError 0.00873781 - topology 4 8 8 2 - Size 5000000 - alpha 0.4 - eta 0.2 - appr.points 300 - tStart 0 - tEnd 1501.png
+
+Optymalna iloœæ punktów danych wejœciowych sieci (pierwsza warstwa sieci) zale¿y od rodzaju sieci, jednak dla wiêkszoœci przypadków optymalnym rozmiarem jest 4 (2 pary x,y)
+
+dla funkcji
+x = t
+y = sin(0.21*t)
+zwiêkszenie rozmiaru pierwszej warstwy pogorszy³o otrzymane wyniki:
+
+xError 63.3346 - yError 0.0184004 - topology 6 8 8 2 - Size 500000 - alpha 0.5 - eta 0.15 - appr.points 300 - tStart 0 - tEnd 1501.png

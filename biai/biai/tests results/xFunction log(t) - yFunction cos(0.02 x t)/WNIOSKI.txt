@@ -1,0 +1,9 @@
+Gdy sieæ dobrze nauczy siê funkcji d³ugoœæ aproksymowanego odcinka nie ma znaczenia. Przyk³ad:
+
+aproksymujemy 300 punktów (1/10 przedzia³u ucz¹cego):
+xError 0.0866225 - yError 0.0128719 - topology 6 8 8 2 - Size 1000000 - alpha 0.3 - eta 0.2 - appr.points 300 - tStart 0 - tEnd 3001.png
+
+aproksymujemy 500 punktów (1/6 przedzia³u ucz¹cego):
+xError 0.0899868 - yError 0.00793309 - topology 6 8 8 2 - Size 1000000 - alpha 0.3 - eta 0.2 - appr.points 500 - tStart 0 - tEnd 3001.png
+
+W tym przypadku b³¹d dla aproksymacji 500 punktów by³ nawet trochê mniejszy ni¿ dla aproksymacji 300 punktów. Zazwyczaj te wartoœci s¹ bardzo zbli¿one, a ich ró¿nice wynikaj¹ z losowoœci sieci i zmieniaj¹ siê przy kolejnych próbach dla tych samych parametrów.

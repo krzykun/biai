@@ -1,0 +1,3 @@
+Dla wiêkszoœci funkcji najmniejszy b³¹d otrzymywany jest dla alpha = 0.2 lub 0.3 i eta = 0.2
+
+xError 392789 - yError 1.30824e+07 - topology 4 8 8 2 - Size 50000 - alpha 0.2 - eta 0.2 - appr.points 200 - tStart 0 - tEnd 2001.png
