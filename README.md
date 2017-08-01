@@ -19,13 +19,7 @@ Done:
 TODO:
 * Transfer functions research
 * Error and improper commands handling
-* Input functions research, other than a square function
-* Parsing more functions: i.e. sin, log
 * Interface smoothing
-* Test net behaviour for points from i.e. sinus function, that curve in y axis in both diretions intermittently
 * Create end report, and in it:
-  1. Implementation description (external + internal specification, description of most important classes and methods and their uses/arguments)
+  1. Implementation description (internal specification, description of most important classes and methods and their uses/arguments)
   2. Research aspect - examples of specific, interesting cases, test analysis, project conclusions
-
-Optional:
-* Multithreading

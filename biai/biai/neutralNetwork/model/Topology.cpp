@@ -7,7 +7,6 @@ Topology createTopology(TopologySchema topologySchema, double alpha, double eta)
 	{
 		topology.push_back(Layer());
 		unsigned howManyOutputs = layerIter == topologySchema.size() - 1 ? 0 : topologySchema[layerIter + 1];
-		auto a = topologySchema[layerIter];
 		for (unsigned neuronIter = 0; neuronIter <= topologySchema[layerIter]; ++neuronIter)
 			topology.back().push_back(Neuron(howManyOutputs, neuronIter, alpha, eta));
 		topology.back().back().setOutputValue(1.0);
