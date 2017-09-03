@@ -1,4 +1,4 @@
-#include "neutralNetwork.h"
+#include "neuralNetwork.h"
 
 vector<double> getInputsForPoint(string xFunction, string yFunction, TopologySchema topologySchema, double t, Normalizer xNormalizer, Normalizer yNormalizer) {
 	vector<double> inputs;

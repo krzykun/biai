@@ -16,10 +16,10 @@
     <Filter Include="Header Files\common">
       <UniqueIdentifier>{ff2bf50e-a944-4a7e-a4de-bd1ac7a589f1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\neutralNetwork">
+    <Filter Include="Header Files\neuralNetwork">
       <UniqueIdentifier>{7497e3da-ca01-40a8-acaa-b59ecc271bdd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\neutralNetwork">
+    <Filter Include="Source Files\neuralNetwork">
       <UniqueIdentifier>{00fa92a4-368b-4a5f-b29b-35c2464aeeed}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\common">
@@ -37,10 +37,10 @@
     <Filter Include="Header Files\common\expression\expression_parser">
       <UniqueIdentifier>{a5aef0e0-9f43-4b3b-826a-5240a81d0d79}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\neutralNetwork\model">
+    <Filter Include="Source Files\neuralNetwork\model">
       <UniqueIdentifier>{e708a2da-b7f6-4291-a419-630e66f54a6e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\neutralNetwork\model">
+    <Filter Include="Header Files\neuralNetwork\model">
       <UniqueIdentifier>{71b213e4-7db2-42c5-a158-378b94abf010}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -72,23 +72,23 @@
     <ClInclude Include="common\StringHelper.h">
       <Filter>Header Files\common</Filter>
     </ClInclude>
-    <ClInclude Include="neutralNetwork\neutralNetwork.h">
-      <Filter>Header Files\neutralNetwork</Filter>
+    <ClInclude Include="neuralNetwork\neuralNetwork.h">
+      <Filter>Header Files\neuralNetwork</Filter>
     </ClInclude>
-    <ClInclude Include="neutralNetwork\model\Connection.h">
-      <Filter>Header Files\neutralNetwork\model</Filter>
+    <ClInclude Include="neuralNetwork\model\Connection.h">
+      <Filter>Header Files\neuralNetwork\model</Filter>
     </ClInclude>
-    <ClInclude Include="neutralNetwork\model\Net.h">
-      <Filter>Header Files\neutralNetwork\model</Filter>
+    <ClInclude Include="neuralNetwork\model\Net.h">
+      <Filter>Header Files\neuralNetwork\model</Filter>
     </ClInclude>
-    <ClInclude Include="neutralNetwork\model\Neuron.h">
-      <Filter>Header Files\neutralNetwork\model</Filter>
+    <ClInclude Include="neuralNetwork\model\Neuron.h">
+      <Filter>Header Files\neuralNetwork\model</Filter>
     </ClInclude>
-    <ClInclude Include="neutralNetwork\model\Topology.h">
-      <Filter>Header Files\neutralNetwork\model</Filter>
+    <ClInclude Include="neuralNetwork\model\Topology.h">
+      <Filter>Header Files\neuralNetwork\model</Filter>
     </ClInclude>
-    <ClInclude Include="neutralNetwork\model\TrainingData.h">
-      <Filter>Header Files\neutralNetwork\model</Filter>
+    <ClInclude Include="neuralNetwork\model\TrainingData.h">
+      <Filter>Header Files\neuralNetwork\model</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -124,20 +124,20 @@
     <ClCompile Include="common\expression\expression_parser_cpp\variablelist.cpp">
       <Filter>Source Files\common\expression\expression_parser</Filter>
     </ClCompile>
-    <ClCompile Include="neutralNetwork\neutralNetwork.cpp">
-      <Filter>Source Files\neutralNetwork</Filter>
+    <ClCompile Include="neuralNetwork\neuralNetwork.cpp">
+      <Filter>Source Files\neuralNetwork</Filter>
     </ClCompile>
-    <ClCompile Include="neutralNetwork\model\Net.cpp">
-      <Filter>Source Files\neutralNetwork\model</Filter>
+    <ClCompile Include="neuralNetwork\model\Net.cpp">
+      <Filter>Source Files\neuralNetwork\model</Filter>
     </ClCompile>
-    <ClCompile Include="neutralNetwork\model\Neuron.cpp">
-      <Filter>Source Files\neutralNetwork\model</Filter>
+    <ClCompile Include="neuralNetwork\model\Neuron.cpp">
+      <Filter>Source Files\neuralNetwork\model</Filter>
     </ClCompile>
-    <ClCompile Include="neutralNetwork\model\Topology.cpp">
-      <Filter>Source Files\neutralNetwork\model</Filter>
+    <ClCompile Include="neuralNetwork\model\Topology.cpp">
+      <Filter>Source Files\neuralNetwork\model</Filter>
     </ClCompile>
-    <ClCompile Include="neutralNetwork\model\TrainingData.cpp">
-      <Filter>Source Files\neutralNetwork\model</Filter>
+    <ClCompile Include="neuralNetwork\model\TrainingData.cpp">
+      <Filter>Source Files\neuralNetwork\model</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

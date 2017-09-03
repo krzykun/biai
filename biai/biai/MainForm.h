@@ -1,5 +1,5 @@
 #pragma once
-#include "neutralNetwork/neutralNetwork.h"
+#include "neuralNetwork/neuralNetwork.h"
 #include <vector>
 #include <string>
 #include <stdio.h>

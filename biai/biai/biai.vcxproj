@@ -154,12 +154,12 @@
     <ClInclude Include="MainForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="neutralNetwork\model\Connection.h" />
-    <ClInclude Include="neutralNetwork\model\Net.h" />
-    <ClInclude Include="neutralNetwork\model\Neuron.h" />
-    <ClInclude Include="neutralNetwork\model\Topology.h" />
-    <ClInclude Include="neutralNetwork\model\TrainingData.h" />
-    <ClInclude Include="neutralNetwork\neutralNetwork.h" />
+    <ClInclude Include="neuralNetwork\model\Connection.h" />
+    <ClInclude Include="neuralNetwork\model\Net.h" />
+    <ClInclude Include="neuralNetwork\model\Neuron.h" />
+    <ClInclude Include="neuralNetwork\model\Topology.h" />
+    <ClInclude Include="neuralNetwork\model\TrainingData.h" />
+    <ClInclude Include="neuralNetwork\neuralNetwork.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainForm.resx">
@@ -176,11 +176,11 @@
     <ClCompile Include="common\StringHelper.cpp" />
     <ClCompile Include="MainForm.cpp" />
     <ClCompile Include="MainFrame.cpp" />
-    <ClCompile Include="neutralNetwork\model\Net.cpp" />
-    <ClCompile Include="neutralNetwork\model\Neuron.cpp" />
-    <ClCompile Include="neutralNetwork\model\Topology.cpp" />
-    <ClCompile Include="neutralNetwork\model\TrainingData.cpp" />
-    <ClCompile Include="neutralNetwork\neutralNetwork.cpp" />
+    <ClCompile Include="neuralNetwork\model\Net.cpp" />
+    <ClCompile Include="neuralNetwork\model\Neuron.cpp" />
+    <ClCompile Include="neuralNetwork\model\Topology.cpp" />
+    <ClCompile Include="neuralNetwork\model\TrainingData.cpp" />
+    <ClCompile Include="neuralNetwork\neuralNetwork.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
